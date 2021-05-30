@@ -1,10 +1,18 @@
-# Pictures of dogs from https://dog.ceo/dog-api/
+# Dogs App
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Link to [Preview](https://happy-dogs-app.netlify.app/)
 
-## Getting Started
+#
 
-First, run the development server:
+## Used technologies:
+
+- Next.js
+
+- API: https://dog.ceo/dog-api/
+
+#
+
+## How to start locally:
 
 ```bash
 npm run dev
