@@ -1,0 +1,36 @@
+.header {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.headerOnTop {
+  background-color: rgba(0, 60, 255, 0.301);
+  font-size: 1.2rem;
+}
+
+.headerOnScroll {
+  background-color: rgba(255, 255, 255, 0);
+  transition: 0.3s;
+  justify-content: space-between;
+}
+
+.headerLogo {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  transition: all 1s;
+}
+
+.headerLogo:hover {
+  border-bottom: 1px solid wheat;
+  padding-left: 1.3rem;
+  transition: all 1s;
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    justify-content: space-between;
+    transition: all 0.3s;
+  }
+}
