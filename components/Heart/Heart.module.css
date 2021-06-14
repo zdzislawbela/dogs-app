@@ -1,0 +1,43 @@
+.heart {
+  background-color: rgb(255, 153, 153);
+  display: inline-block;
+  height: 20px;
+  margin: 0 10px;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0;
+  transform: rotate(-60deg);
+  width: 20px;
+  transition: 0.3s all;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: rgb(255, 153, 153);
+  border-radius: 50%;
+  height: 20px;
+  position: absolute;
+  width: 20px;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+.heart:before {
+  top: -12px;
+  left: 0;
+}
+
+.heart:after {
+  left: 12px;
+  top: 0;
+}
+
+.heart:hover,
+.heart:hover:before,
+.heart:hover::after {
+  background-color: rgb(255, 0, 0);
+  transform: rotate(-45deg);
+  bottom: 1rem;
+  transition: 0.3s all;
+}
