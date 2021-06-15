@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useCallback } from "react";
 
 import { useAppContext } from "../../context";
 import { dogBreeds } from "./dogs";
+import { Heart } from "../Heart";
+import styles from "./FetchedDogsContainer.module.css";
 
-import styles from "./FetchDogsOnScroll.module.css";
-
-export const FetchDogsOnScroll = () => {
+export const FetchedDogsContainer = () => {
   const {
     loading,
     setLoading,
@@ -68,7 +68,7 @@ export const FetchDogsOnScroll = () => {
       fetchDog();
       setLoading(false);
       setError(false);
-    }, 500);
+    }, 100);
     observer.current;
 
     return () => window.clearTimeout(timeoutID);
@@ -86,7 +86,10 @@ export const FetchDogsOnScroll = () => {
 
             return (
               <div key={dog.message} className={styles.dog}>
-                <img className={styles.dogImg} src={dog.message} alt='dog' />
+                <div className={styles.imgContainer}>
+                  <img className={styles.dogImg} src={dog.message} alt='dog' />
+                  <Heart />
+                </div>
                 <p className={styles.dogImgTitle}>{breedTitle}</p>
               </div>
             );

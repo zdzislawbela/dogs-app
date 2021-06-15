@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { FetchDogsOnScroll } from "../components/FetchDogsOnScroll/FetchDogsOnScroll";
+import { FetchedDogsContainer } from "../components/FetchedDogsContainer";
 import styles from "../styles/Home.module.css";
 
 export default function Fetch() {
@@ -14,7 +14,7 @@ export default function Fetch() {
         <link rel='icon' href='/favicon.png' />
       </Head>
 
-      <FetchDogsOnScroll />
+      <FetchedDogsContainer />
     </div>
   );
 }
