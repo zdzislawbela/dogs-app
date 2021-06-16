@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 import Menu from "../Menu/Menu";
 import styles from "./Header.module.css";
@@ -22,7 +23,9 @@ const Header = () => {
       }`}
     >
       <a className={styles.headerLogo} href='/'>
-        <div>🐕 App</div>
+        <Link href='/'>
+          <a>🐕 Home</a>
+        </Link>
       </a>
       <Menu />
     </div>
