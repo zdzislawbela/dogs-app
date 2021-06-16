@@ -1,14 +1,20 @@
+.disabled {
+  visibility: hidden;
+  transition: 0.5s all;
+}
+
 .heart {
   background-color: rgb(255, 78, 78);
   display: inline-block;
   height: 20px;
   margin: 0 10px;
   position: absolute;
-  bottom: 0.5rem;
-  right: -2rem;
+  bottom: 1.5rem;
+  right: 0;
   transform: rotate(-60deg);
   width: 20px;
   transition: 0.3s all;
+  z-index: 1;
 }
 
 .heart:before,
@@ -38,6 +44,28 @@
 .heart:hover::after {
   background-color: rgb(255, 0, 0);
   transform: rotate(-45deg);
-  bottom: 1rem;
+  /* bottom: 1rem; */
   transition: 0.3s all;
+}
+
+.likedHeart,
+.likedHeart:before,
+.likedHeart:after {
+  background-color: rgb(255, 0, 0);
+}
+
+.isLiked {
+  position: relative;
+  bottom: 0rem;
+  right: 3rem;
+  background-color: rgba(255, 0, 0, 0.123);
+  border-radius: 50px;
+  width: 3rem;
+  height: 3rem;
+  transition: 0.5s all;
+  transform: rotate(60deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
 }
