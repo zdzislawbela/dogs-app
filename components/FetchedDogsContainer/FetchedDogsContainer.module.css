@@ -6,14 +6,12 @@
   align-items: center;
 }
 
-.imgContainer {
-  position: relative;
+.dogsContainer {
+  text-align: center;
 }
 
-.dogsContainer {
-  background: rgba(0, 0, 0, 0.308);
-  font-size: 0.7rem;
-  text-align: center;
+.imgContainer {
+  position: relative;
 }
 
 .header:hover {
@@ -45,4 +43,20 @@
 
 .loading {
   padding-top: 75vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .dog {
+    width: 100%;
+  }
+
+  .dogImg {
+    width: 100%;
+  }
+
+  .dogImgTitle {
+    background: rgb(81, 1, 92);
+    max-width: 100%;
+    border-radius: 0 0 10px 10px;
+  }
 }

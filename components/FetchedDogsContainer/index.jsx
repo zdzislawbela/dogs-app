@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback } from "react";
 
 import { useAppContext } from "../../context";
-import { dogBreeds } from "./dogs";
+import { dogBreeds } from "./dogbreeds";
 import { Heart } from "../Heart";
 import styles from "./FetchedDogsContainer.module.css";
 
@@ -15,7 +15,6 @@ export const FetchedDogsContainer = () => {
     setBreed,
     error,
     setError,
-    apiCallCounter,
     setApiCallCounter,
     dogsAPI,
   } = useAppContext();
@@ -88,7 +87,7 @@ export const FetchedDogsContainer = () => {
               <div key={dog.message} className={styles.dog}>
                 <div className={styles.imgContainer}>
                   <img className={styles.dogImg} src={dog.message} alt='dog' />
-                  <Heart />
+                  <Heart newDog={dog} image={dog.message} breed={breedTitle} />
                 </div>
                 <p className={styles.dogImgTitle}>{breedTitle}</p>
               </div>
