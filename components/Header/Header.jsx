@@ -22,23 +22,23 @@ const Header = () => {
         scrolled ? style.headerOnScroll : style.headerOnTop
       }`}
     >
-      <div className={style.link}>
-        <Link className={style.link} href='/'>
+      <Link href='/'>
+        <div className={style.link}>
           <a> Home 🏠</a>
-        </Link>
-      </div>
+        </div>
+      </Link>
 
-      <div className={style.link}>
-        <Link className={style.link} href='/fetch'>
+      <Link href='/fetch'>
+        <div className={style.link}>
           <a> Fetch 🐕</a>
-        </Link>
-      </div>
+        </div>
+      </Link>
 
-      <div className={style.link}>
-        <Link href='/liked'>
+      <Link href='/liked'>
+        <div className={style.link}>
           <a> Liked ❤️</a>
-        </Link>
-      </div>
+        </div>
+      </Link>
 
       <Menu />
     </div>
