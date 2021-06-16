@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import Menu from "../Menu/Menu";
-import styles from "./Header.module.css";
+import style from "./Header.module.css";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(0);
@@ -18,15 +18,28 @@ const Header = () => {
 
   return (
     <div
-      className={`${styles.header} ${
-        scrolled ? styles.headerOnScroll : styles.headerOnTop
+      className={`${style.header} ${
+        scrolled ? style.headerOnScroll : style.headerOnTop
       }`}
     >
-      <a className={styles.headerLogo} href='/'>
-        <Link href='/'>
-          <a>🐕 Home</a>
+      <div className={style.link}>
+        <Link className={style.link} href='/'>
+          <a> Home 🏠</a>
         </Link>
-      </a>
+      </div>
+
+      <div className={style.link}>
+        <Link className={style.link} href='/fetch'>
+          <a> Fetch 🐕</a>
+        </Link>
+      </div>
+
+      <div className={style.link}>
+        <Link href='/liked'>
+          <a> Liked ❤️</a>
+        </Link>
+      </div>
+
       <Menu />
     </div>
   );

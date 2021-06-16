@@ -4,7 +4,8 @@
   display: flex;
   justify-content: space-between;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.219);
+  background-color: rgba(0, 0, 0, 0.884);
+  padding: 0.2rem 0.2rem 0 0.2rem;
 }
 
 .headerOnTop {
@@ -16,12 +17,13 @@
   transition: all 0.3s;
 }
 
-.headerLogo {
+.link {
   padding: 1rem;
+  text-align: center;
   transition: all 1s;
 }
 
-.headerLogo:hover {
+.link:hover {
   border-bottom: 1px solid wheat;
   padding-left: 1.8rem;
   transition: all 0.3s;
