@@ -8,6 +8,10 @@ body {
   color: rgba(245, 222, 179, 0.877);
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;
