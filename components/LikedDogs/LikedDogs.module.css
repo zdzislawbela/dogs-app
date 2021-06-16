@@ -1,0 +1,81 @@
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  border: olive 1px solid;
+  z-index: 10;
+}
+
+.containerPre {
+  background: rgb(0, 0, 0);
+  font-size: 0.7rem;
+  padding: 0.5rem;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.imgContainer {
+  position: relative;
+}
+
+.dog {
+  width: 10rem;
+  height: 10rem;
+  padding: 1rem;
+  transition: 0.3s all;
+}
+
+.dogImg {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.dog:hover {
+  width: 11rem;
+  height: 10rem;
+  padding: 1rem;
+  transition: 0.3s all;
+}
+
+.dogImgTitle {
+  position: relative;
+  bottom: 0.5rem;
+  left: 0rem;
+  background: rgb(81, 1, 92);
+  padding: 0.7rem;
+  letter-spacing: 1px;
+  font-size: 0.7rem;
+  margin: auto;
+  border-radius: 0 0 15px 15px;
+  text-align: center;
+}
+
+.closingIcon {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  margin: 1rem;
+  z-index: 10;
+
+  transition: 0.3s all;
+}
+
+.closingIcon:hover {
+  border: rgb(153, 0, 0) solid 2px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .containerPre {
+    justify-content: center;
+  }
+}
