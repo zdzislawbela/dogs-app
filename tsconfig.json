@@ -19,7 +19,8 @@
     "**/*.ts",
     "**/*.tsx",
     "components/Header/Header.jsx",
-    "components/FetchDogsOnScroll/FetchDogsOnScroll.jsx"
+    "components/FetchDogsOnScroll/FetchDogsOnScroll.jsx",
+    "components/Heart/index.jsx"
   ],
   "exclude": ["node_modules"]
 }
