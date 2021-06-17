@@ -22,26 +22,24 @@ export const Heart = ({ image, breed }) => {
   };
 
   return (
-    <>
-      <button className={style.heartButton}>
-        {isLiked ? (
-          <Image
-            onClick={handleLike}
-            src='/likedHeart.png'
-            alt='Picture of heart'
-            width={24}
-            height={24}
-          />
-        ) : (
-          <Image
-            onClick={handleLike}
-            src='/heart.png'
-            alt='Picture of heart'
-            width={24}
-            height={24}
-          />
-        )}
-      </button>
-    </>
+    <button className={style.heartButton}>
+      {isLiked ? (
+        <Image
+          onClick={handleLike}
+          src='/likedHeart.png'
+          alt='Picture of heart'
+          width={24}
+          height={24}
+        />
+      ) : (
+        <Image
+          onClick={handleLike}
+          src='/heart.png'
+          alt='Picture of heart'
+          width={24}
+          height={24}
+        />
+      )}
+    </button>
   );
 };

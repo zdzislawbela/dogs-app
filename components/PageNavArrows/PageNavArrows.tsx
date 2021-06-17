@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PageNavArrows.module.css";
+import style from "./PageNavArrows.module.css";
 
 export const PageNavArrows = () => {
   const handleScrollUp = () => {
@@ -17,11 +17,17 @@ export const PageNavArrows = () => {
 
   return (
     <div>
-      <button onClick={handleScrollUp} className={styles.up}>
+      <button
+        onClick={handleScrollUp}
+        className={`${style.button} ${style.up}`}
+      >
         UP
       </button>
 
-      <button onClick={handleScrollDown} className={styles.down}>
+      <button
+        onClick={handleScrollDown}
+        className={`${style.button} ${style.down}`}
+      >
         DOWN
       </button>
     </div>

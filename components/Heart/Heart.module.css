@@ -1,5 +1,4 @@
 .heartButton {
-  /* position: absolute; */
   background: none;
   border: none;
   cursor: pointer;
@@ -8,7 +7,6 @@
   margin: 0 10px;
   bottom: 1.5rem;
   right: 0;
-
   transition: 0.3s all;
   z-index: 1;
 }

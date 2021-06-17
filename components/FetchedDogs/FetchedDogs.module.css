@@ -17,7 +17,7 @@
 .dogImgTitle {
   position: relative;
   bottom: 0.5rem;
-  left: 0rem;
+  left: 0;
   background: rgb(81, 1, 92);
   padding: 0.4rem;
   letter-spacing: 1px;
