@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Header } from "../Header/Header";
+import style from "./Layout.module.css";
 
 type Props = {
   children: JSX.Element;
@@ -8,7 +9,9 @@ type Props = {
 export const Layout = ({ children }: Props) => {
   return (
     <>
-      <Header />
+      <div className={style.header}>
+        <Header />
+      </div>
       {children}
     </>
   );

@@ -1,4 +1,5 @@
 .closingIcon {
+  color: rgb(118, 118, 118);
   position: absolute;
   top: 0.2rem;
   right: 0.2rem;
@@ -7,6 +8,6 @@
 }
 
 .closingIcon:hover {
-  color: rgb(255, 0, 0);
+  color: rgb(111, 1, 1);
   cursor: pointer;
 }

@@ -12,19 +12,18 @@ export const Header = () => {
           <a> Home 🏠</a>
         </div>
       </Link>
-
+      |
       <Link href='/fetch'>
         <div className={style.link}>
           <a> Fetch 🐕</a>
         </div>
       </Link>
-
+      |
       <Link href='/liked'>
         <div className={style.link}>
           <a> Liked ❤️</a>
         </div>
       </Link>
-
       <KebabMenu />
     </div>
   );

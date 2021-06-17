@@ -24,8 +24,9 @@ export const LikedDogs = () => {
               </div>
 
               <div className={styles.dogImgTitle}>
-                <p>{dog.breed}</p>
-
+                <div className={styles.title}>
+                  <p>{dog.breed}</p>
+                </div>
                 <RemoveFromLikeListButton image={dog.image} />
               </div>
             </div>
