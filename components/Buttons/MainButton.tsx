@@ -93,7 +93,7 @@ const useStyles = makeStyles(
   })
 );
 
-export default function ButtonBases() {
+export default function MainButton() {
   const classes = useStyles();
 
   return (

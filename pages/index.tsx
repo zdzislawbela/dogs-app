@@ -1,6 +1,6 @@
 import Head from "next/head";
-import ButtonBases from "../components/Button/Button";
-import styles from "../styles/Home.module.css";
+import MainButton from "../components/Buttons/MainButton";
+import styles from "../styles/Page.module.css";
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
           <h3 className={styles.title}>Welcome to 🐕 App</h3>
         </a>
         <div className={styles.buttonContainer}>
-          <ButtonBases />
+          <MainButton />
         </div>
       </div>
     </div>

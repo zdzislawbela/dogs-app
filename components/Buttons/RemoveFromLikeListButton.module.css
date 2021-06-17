@@ -1,0 +1,12 @@
+.closingIcon {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  z-index: 10;
+  transition: 0.3s all;
+}
+
+.closingIcon:hover {
+  color: rgb(255, 0, 0);
+  cursor: pointer;
+}
