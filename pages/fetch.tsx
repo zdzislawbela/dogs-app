@@ -1,26 +1,29 @@
 import Head from "next/head";
 import React from "react";
-import { FetchedDogsContainer } from "../components/FetchedDogsContainer";
-import { LikedDogs } from "../components/LikedDogs";
-import { PageNavArrows } from "../components/PageNavArrows";
+import { FetchedDogs } from "../components/FetchedDogs/FetchedDogs";
 import { useAppContext } from "../context";
 
 export default function Fetch() {
-  const { isModalOpen } = useAppContext();
+  const { dogs } = useAppContext();
+  const numberOfDogs = dogs.length;
+  let titleOfPage = `🐕 You fetched ${numberOfDogs} dogs!`;
+
+  if (dogs.length === 0) {
+    titleOfPage = "🐕 Loading ...";
+  }
 
   return (
     <div>
       <Head>
-        <title>🐕 Happy fetching!</title>
+        <title>{titleOfPage}</title>
         <meta
           name='description'
           content='Collecting open source dog pictures from dog.ceo'
         />
         <link rel='icon' href='/favicon.png' />
       </Head>
-      {isModalOpen && <LikedDogs />}
-      <PageNavArrows />
-      <FetchedDogsContainer />
+
+      <FetchedDogs />
     </div>
   );
 }
