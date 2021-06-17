@@ -20,7 +20,8 @@
     "**/*.tsx",
     "components/Header/Header.jsx",
     "components/FetchDogsOnScroll/FetchDogsOnScroll.jsx",
-    "components/Heart/index.jsx"
+    "components/Heart/Heart.jsx",
+    "components/Buttons/RemoveFromLikeListButton.jsx"
   ],
   "exclude": ["node_modules"]
 }
