@@ -1,7 +1,11 @@
-import React from "react";
-import Header from "../Header/Header";
+import React, { FC } from "react";
+import { Header } from "../Header/Header";
 
-export const Layout: React.FC<{}> = ({ children }) => {
+type Props = {
+  children: JSX.Element;
+};
+
+export const Layout = ({ children }: Props) => {
   return (
     <>
       <Header />
