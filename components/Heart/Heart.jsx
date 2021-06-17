@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAppContext } from "../../context";
 import style from "./Heart.module.css";
 
-export const Heart = ({ newDog, image, breed }) => {
+export const Heart = ({ image, breed }) => {
   const { likedDogs, setLikedDogs } = useAppContext();
   const [isLiked, setIsLiked] = useState(false);
 
