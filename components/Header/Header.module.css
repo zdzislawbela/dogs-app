@@ -2,36 +2,30 @@
   position: fixed;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.884);
+  background-color: rgba(0, 0, 0, 0.891);
   padding: 0.2rem 0.2rem 0 0.2rem;
-}
-
-.headerOnTop {
-  font-size: 1.2rem;
-}
-
-.headerOnScroll {
-  justify-content: space-between;
-  transition: all 0.3s;
 }
 
 .link {
   padding: 1rem;
   text-align: center;
-  transition: all 1s;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .link:hover {
+  margin-top: -4px;
   border-bottom: 1px solid wheat;
-  padding-left: 1.8rem;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
-@media only screen and (max-width: 600px) {
-  .header {
-    justify-content: space-between;
-    transition: all 0.3s;
+@media only screen and (max-width: 400px) {
+  .link {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    transition: all 1s;
+    cursor: pointer;
   }
 }
