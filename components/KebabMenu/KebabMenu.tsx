@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { useAppContext } from "../../context";
 
-export default function LongMenu() {
-  const { apiCallCounter, likedDogs, setIsModalOpen } = useAppContext();
+import style from "./KebabMenu.module.css";
 
+export const KebabMenu = () => {
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -19,19 +21,12 @@ export default function LongMenu() {
     setAnchorEl(null);
   };
 
-  const handleOpenModal = () => {
-    if (likedDogs.length === 0) {
-      return handleClose();
-    }
+  const openAboutPage = () => {
     handleClose();
-    setIsModalOpen(true);
+    router.push("/about");
   };
 
-  const options = [
-    `Fetched: ${apiCallCounter}`,
-    `Liked: ${likedDogs.length}`,
-    "Select breeds",
-  ];
+  const options = ["Select breeds", "About"];
 
   const ITEM_HEIGHT = 48;
 
@@ -48,6 +43,7 @@ export default function LongMenu() {
       </IconButton>
 
       <Menu
+        className={style.menu}
         id='long-menu'
         anchorEl={anchorEl}
         keepMounted
@@ -60,20 +56,23 @@ export default function LongMenu() {
           },
         }}
       >
-        {options.map((option) => (
-          <MenuItem
-            key={option}
-            selected={option === `Liked: ${likedDogs.length}`}
-            onClick={
-              option === `Liked: ${likedDogs.length}`
-                ? handleOpenModal
-                : handleClose
-            }
-          >
-            {option}
-          </MenuItem>
-        ))}
+        <div className={style.kebabOptionsContainer}>
+          <div className={style.kebabOptionsHeader}>
+            <p>🐕 </p>
+          </div>
+
+          <div className={style.kebabOptions}>
+            {options.map((option) => (
+              <MenuItem
+                key={option}
+                onClick={option === `About` ? openAboutPage : handleClose}
+              >
+                {option}
+              </MenuItem>
+            ))}
+          </div>
+        </div>
       </Menu>
     </>
   );
-}
+};
