@@ -1,44 +1,30 @@
 .container {
-  padding: 4rem 3rem;
+  padding: 3.5rem 0;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.dogsContainer {
-  text-align: center;
-}
-
-.imgContainer {
-  position: relative;
-}
-
-.header:hover {
-  background-color: rgb(0, 0, 0);
-  transition-timing-function: ease;
-  transition: width 2s;
-}
-
 .dog {
-  max-width: 600px;
+  width: 50vw;
 }
 
 .dogImg {
-  max-width: 100%;
+  width: 100%;
 }
 
 .dogImgTitle {
   position: relative;
-  bottom: 2rem;
+  bottom: 0.5rem;
   left: 0rem;
-  background: rgba(81, 1, 92, 0.863);
-  padding: 1rem;
+  background: rgb(81, 1, 92);
+  padding: 0.4rem;
   letter-spacing: 1px;
-  font-size: 1.1rem;
-  max-width: 70%;
+  font-size: 0.7rem;
   margin: auto;
-  border-radius: 5px;
+  border-radius: 0 0 15px 15px;
+  text-align: center;
 }
 
 .loading {
@@ -47,7 +33,7 @@
 
 @media only screen and (max-width: 600px) {
   .dog {
-    width: 100%;
+    width: 80%;
   }
 
   .dogImg {

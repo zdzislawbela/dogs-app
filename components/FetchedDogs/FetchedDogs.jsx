@@ -3,9 +3,10 @@ import React, { useEffect, useRef, useCallback } from "react";
 import { useAppContext } from "../../context";
 import { dogBreeds } from "./dogbreeds";
 import { Heart } from "../Heart";
-import styles from "./FetchedDogsContainer.module.css";
 
-export const FetchedDogsContainer = () => {
+import styles from "./FetchedDogs.module.css";
+
+export const FetchedDogs = () => {
   const {
     loading,
     setLoading,
@@ -75,29 +76,29 @@ export const FetchedDogsContainer = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.dogsContainer}>
-        {dogs &&
-          dogs.map((dog) => {
-            const breedTitle = dog.message.slice(
-              30,
-              getPosition(dog.message, "/", 5)
-            );
+      {dogs &&
+        dogs.map((dog) => {
+          const breedTitle = dog.message.slice(
+            30,
+            getPosition(dog.message, "/", 5)
+          );
 
-            return (
-              <div key={dog.message} className={styles.dog}>
-                <div className={styles.imgContainer}>
-                  <img className={styles.dogImg} src={dog.message} alt='dog' />
-                  <Heart newDog={dog} image={dog.message} breed={breedTitle} />
-                </div>
-                <p className={styles.dogImgTitle}>{breedTitle}</p>
+          return (
+            <div key={dog.message} className={styles.dog}>
+              <div className={styles.imgContainer}>
+                <img className={styles.dogImg} src={dog.message} alt='dog' />
               </div>
-            );
-          })}
+              <div className={styles.dogImgTitle}>
+                <p>{breedTitle}</p>
+                <Heart image={dog.message} breed={breedTitle} />
+              </div>
+            </div>
+          );
+        })}
 
-        <div>
-          <div className={styles.loading} ref={lastBookElementRef}>
-            {error && `${error}`} Loading...
-          </div>
+      <div>
+        <div className={styles.loading} ref={lastBookElementRef}>
+          {error && `${error}`} Loading...
         </div>
       </div>
     </div>
