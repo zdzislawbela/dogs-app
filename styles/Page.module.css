@@ -83,6 +83,49 @@
   border-bottom: rgba(0, 0, 255, 0.253) 1px solid;
 }
 
+.fourOhFourContainer {
+  margin: 0;
+}
+
+.fourOhFour {
+  display: inline-block;
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  margin: 0;
+  margin-right: 20px;
+  padding: 10px 23px 10px 0;
+  font-size: 24px;
+  font-weight: 500;
+  vertical-align: top;
+}
+
+.fourOhFourText {
+  display: inline-block;
+  text-align: left;
+  line-height: 49px;
+  height: 49px;
+  vertical-align: middle;
+}
+
+.fourOhFourTextHeader {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.goBackHomeButton {
+  margin: 2rem 1rem;
+  padding: 1rem;
+  background: none;
+  border: 1px solid rgb(221, 221, 221);
+  cursor: pointer;
+}
+
+.goBackHomeButton:hover {
+  background: rgb(247, 247, 247);
+}
+
 @media (max-width: 650px) {
   .grid {
     width: 100%;
