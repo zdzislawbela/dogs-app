@@ -8,19 +8,19 @@ export const Header = () => {
   return (
     <div className={style.header}>
       <Link href='/'>
-        <div className={style.link}>
+        <div className={style.headerButton}>
           <a> Home 🏠</a>
         </div>
       </Link>
       |
       <Link href='/fetch'>
-        <div className={style.link}>
+        <div className={style.headerButton}>
           <a> Fetch 🐕</a>
         </div>
       </Link>
       |
       <Link href='/liked'>
-        <div className={style.link}>
+        <div className={style.headerButton}>
           <a> Liked ❤️</a>
         </div>
       </Link>
