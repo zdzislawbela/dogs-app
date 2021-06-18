@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useCallback } from "react";
 
 import { useAppContext } from "../../context";
-import { dogBreeds } from "./dogbreeds";
-import { Heart } from "../Heart/Heart";
+import { dogBreeds } from "../../data/dogbreeds";
+import { HeartButton } from "../Buttons/HeartButton/HeartButton";
 
 import styles from "./FetchedDogs.module.css";
 
@@ -85,12 +85,14 @@ export const FetchedDogs = () => {
 
           return (
             <div key={dog.message} className={styles.dog}>
-              <div className={styles.imgContainer}>
-                <img className={styles.dogImg} src={dog.message} alt='dog' />
-              </div>
-              <div className={styles.dogImgTitle}>
-                <p>{breedTitle}</p>
-                <Heart image={dog.message} breed={breedTitle} />
+              <img className={styles.dogImg} src={dog.message} alt='dog' />
+              <div className={styles.dogTitle}>
+                <div className={styles.heart}>
+                  <HeartButton image={dog.message} breed={breedTitle} />{" "}
+                </div>
+                <div className={styles.title}>
+                  <p>{breedTitle}</p>
+                </div>
               </div>
             </div>
           );

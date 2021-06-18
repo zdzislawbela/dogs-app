@@ -14,14 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "components/Header/Header.jsx",
-    "components/FetchDogsOnScroll/FetchDogsOnScroll.jsx",
-    "components/Heart/Heart.jsx",
-    "components/Buttons/RemoveFromLikeListButton.jsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

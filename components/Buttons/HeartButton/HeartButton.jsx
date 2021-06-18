@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { useAppContext } from "../../context";
-import style from "./Heart.module.css";
+import { useAppContext } from "../../../context/";
+import style from "./HeartButton.module.css";
 
-export const Heart = ({ image, breed }) => {
+export const HeartButton = ({ image, breed }) => {
   const { likedDogs, setLikedDogs } = useAppContext();
   const [isLiked, setIsLiked] = useState(false);
 

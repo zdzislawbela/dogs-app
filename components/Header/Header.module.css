@@ -1,31 +1,33 @@
 .header {
-  position: fixed;
-  width: 100%;
+  width: 80vw;
   display: flex;
   justify-content: center;
-  z-index: 100;
-  background-color: rgba(0, 0, 0, 0.891);
+  align-items: center;
+  background-color: rgb(255, 255, 255);
   padding: 0.2rem 0.2rem 0 0.2rem;
+  border-bottom: rgb(84, 84, 84) 1px solid;
 }
 
-.link {
+.headerButton {
+  background: none;
+  border: none;
   padding: 1rem;
   text-align: center;
   transition: all 0.2s;
-  cursor: pointer;
 }
 
-.link:hover {
-  margin-top: -4px;
-  border-bottom: 1px solid wheat;
+.headerButton:hover {
+  background: rgba(208, 208, 208, 0.178);
+  cursor: pointer;
   transition: all 0.2s;
 }
 
 @media only screen and (max-width: 400px) {
-  .link {
+  .headerButton {
     padding: 0.5rem 1rem;
     text-align: center;
-    transition: all 1s;
-    cursor: pointer;
+  }
+  .header {
+    width: 100%;
   }
 }
