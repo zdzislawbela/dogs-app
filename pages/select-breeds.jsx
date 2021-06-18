@@ -1,25 +1,36 @@
 import Head from "next/head";
-import React from "react";
-import FormLabel from "@material-ui/core/FormLabel";
+import React, { useState, useEffect } from "react";
 
 import { useAppContext } from "../context";
-import { dogBreeds } from "../data/dogbreeds";
+
 import { BreedCheckbox } from "../BreedCheckbox/BreedCheckbox";
 import styles from "../styles/Page.module.css";
 
 export default function SelectBreeds() {
   const {
-    loading,
-    setLoading,
-    dogs,
-    setDogs,
-    breed,
-    setBreed,
-    error,
-    setError,
-    setApiCallCounter,
-    dogsAPI,
+    dogBreedsContainer,
+    setDogBreedsContainer,
+    isSelectAll,
+    setIsSelectAll,
   } = useAppContext();
+
+  const handleSelectAll = () => {
+    setIsSelectAll(!isSelectAll);
+    const selectedBreeds = dogBreedsContainer.map(({ name }) => {
+      return { name: name, checked: !isSelectAll };
+    });
+    setDogBreedsContainer(selectedBreeds);
+  };
+
+  const handleBreedCheckbox = (option) => {
+    const selectedBreeds = dogBreedsContainer.map(({ name, checked }) => {
+      if (name === option) {
+        return { name: name, checked: !checked };
+      }
+      return { name: name, checked: checked };
+    });
+    setDogBreedsContainer(selectedBreeds);
+  };
 
   return (
     <div className={styles.main}>
@@ -32,17 +43,22 @@ export default function SelectBreeds() {
         <link rel='icon' href='/favicon.png' />
       </Head>
       <div className={styles.breeds}>
-        <FormLabel component='legend'>
-          Select breeds you'd like to fetch
-        </FormLabel>
+        <p>Select breeds you'd like to fetch </p>
         <div className={styles.breed}>
-          <BreedCheckbox breed='Select All' />
+          <BreedCheckbox
+            handleCheckbox={handleSelectAll}
+            breed='Select All'
+            isChecked={isSelectAll}
+          />
         </div>
-
-        {dogBreeds.map((breed) => {
+        {dogBreedsContainer.map(({ name, checked }) => {
           return (
-            <div key={breed} className={styles.breed}>
-              <BreedCheckbox breed={breed} />
+            <div key={name} className={styles.breed}>
+              <BreedCheckbox
+                handleCheckbox={handleBreedCheckbox}
+                breed={name}
+                isChecked={checked}
+              />
             </div>
           );
         })}

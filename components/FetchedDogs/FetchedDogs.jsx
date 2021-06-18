@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import { useAppContext } from "../../context";
-import { dogBreeds } from "../../data/dogbreeds";
+// import { dogBreeds } from "../../data/dogbreeds";
 import { HeartButton } from "../Buttons/HeartButton/HeartButton";
 
 import styles from "./FetchedDogs.module.css";
@@ -17,14 +17,31 @@ export const FetchedDogs = () => {
     error,
     setError,
     setApiCallCounter,
+    dogBreedsContainer,
     dogsAPI,
   } = useAppContext();
 
+  const [random, setRandom] = useState(0);
+
   const observer = useRef();
 
+  const userSelectedBreeds = dogBreedsContainer
+    .map((breed) => {
+      if (breed.checked) return breed.name;
+      return;
+    })
+    .filter((name) => {
+      return name != undefined;
+    });
+
   const getRandomBreed = () => {
-    const random = Math.floor(Math.random() * dogBreeds.length);
-    return setBreed(dogBreeds[random]);
+    setRandom(Math.floor(Math.random() * userSelectedBreeds.length));
+
+    if (random === 0) {
+      setRandom(-1);
+    }
+
+    return setBreed(userSelectedBreeds[random]);
   };
 
   const lastBookElementRef = useCallback(
@@ -72,7 +89,7 @@ export const FetchedDogs = () => {
     observer.current;
 
     return () => window.clearTimeout(timeoutID);
-  }, [breed, dogsAPI]);
+  }, [dogsAPI]);
 
   return (
     <div className={styles.container}>

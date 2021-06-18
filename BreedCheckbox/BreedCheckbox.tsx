@@ -6,14 +6,16 @@ import FormControl from "@material-ui/core/FormControl";
 
 type Props = {
   breed: string;
+  handleCheckbox: (option: string) => void;
+  isChecked: boolean;
 };
 
-export const BreedCheckbox = ({ breed }: Props) => {
-  const [checked, setChecked] = useState(true);
+export const BreedCheckbox = ({ breed, handleCheckbox, isChecked }: Props) => {
+  const [checked, setChecked] = useState(isChecked);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
-    console.log({ checked });
+    handleCheckbox(event.target.value);
   };
 
   return (
@@ -24,6 +26,7 @@ export const BreedCheckbox = ({ breed }: Props) => {
           control={<Checkbox color='primary' onChange={handleChange} />}
           label={breed}
           labelPlacement='end'
+          checked={isChecked}
         />
       </FormGroup>
     </FormControl>
