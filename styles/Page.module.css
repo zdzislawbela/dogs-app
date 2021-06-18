@@ -59,12 +59,28 @@
 .buttonForAboutPage:hover {
   background: rgb(186, 186, 186);
 }
+
 .aboutContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding-top: 2rem;
+}
+
+.breeds {
+  width: 50vw;
+  min-width: 200px;
+  max-width: 500px;
+  padding: 0 1rem;
+}
+
+.breed {
+  display: flex;
+
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-bottom: rgba(0, 0, 255, 0.253) 1px solid;
 }
 
 @media (max-width: 650px) {
