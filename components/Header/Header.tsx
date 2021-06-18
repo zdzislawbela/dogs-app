@@ -8,21 +8,21 @@ export const Header = () => {
   return (
     <div className={style.header}>
       <Link href='/'>
-        <div className={style.headerButton}>
+        <button className={style.headerButton}>
           <a> Home 🏠</a>
-        </div>
+        </button>
       </Link>
       |
       <Link href='/fetch'>
-        <div className={style.headerButton}>
+        <button className={style.headerButton}>
           <a> Fetch 🐕</a>
-        </div>
+        </button>
       </Link>
       |
       <Link href='/liked'>
-        <div className={style.headerButton}>
+        <button className={style.headerButton}>
           <a> Liked ❤️</a>
-        </div>
+        </button>
       </Link>
       <KebabMenu />
     </div>
