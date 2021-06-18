@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import { useAppContext } from "../../context";
-// import { dogBreeds } from "../../data/dogbreeds";
 import { HeartButton } from "../Buttons/HeartButton/HeartButton";
 
 import styles from "./FetchedDogs.module.css";
@@ -37,7 +36,7 @@ export const FetchedDogs = () => {
   const getRandomBreed = () => {
     setRandom(Math.floor(Math.random() * userSelectedBreeds.length));
 
-    if (random === 0) {
+    if ((random === 0) | (random === 1)) {
       setRandom(-1);
     }
 
