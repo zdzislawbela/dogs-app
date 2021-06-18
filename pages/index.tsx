@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>🐕</title>
+        <title>🐕 Pictures of dogs</title>
         <meta
           name='description'
           content='Collecting open source dog pictures from dog.ceo'

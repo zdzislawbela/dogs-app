@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback } from "react";
 
 import { useAppContext } from "../../context";
 import { dogBreeds } from "./dogbreeds";
-import { Heart } from "../Heart/Heart";
+import { HeartButton } from "../Buttons/HeartButton/HeartButton";
 
 import styles from "./FetchedDogs.module.css";
 
@@ -88,7 +88,7 @@ export const FetchedDogs = () => {
               <img className={styles.dogImg} src={dog.message} alt='dog' />
               <div className={styles.dogTitle}>
                 <div className={styles.heart}>
-                  <Heart image={dog.message} breed={breedTitle} />{" "}
+                  <HeartButton image={dog.message} breed={breedTitle} />{" "}
                 </div>
                 <div className={styles.title}>
                   <p>{breedTitle}</p>

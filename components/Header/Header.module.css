@@ -3,8 +3,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
   padding: 0.2rem 0.2rem 0 0.2rem;
+  border-bottom: rgb(84, 84, 84) 1px solid;
 }
 
 .link {
