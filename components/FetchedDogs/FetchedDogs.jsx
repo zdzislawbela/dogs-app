@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback } from "react";
 
 import { useAppContext } from "../../context";
-import { dogBreeds } from "./dogbreeds";
+import { dogBreeds } from "../../data/dogbreeds";
 import { HeartButton } from "../Buttons/HeartButton/HeartButton";
 
 import styles from "./FetchedDogs.module.css";
