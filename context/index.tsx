@@ -1,4 +1,9 @@
 import React, { createContext, useContext, useState, FC } from "react";
+import { dogBreeds } from "../data/dogbreeds";
+
+const initDogBreeds = dogBreeds.map((dog) => {
+  return { name: dog, checked: true };
+});
 
 export type DogDetails = {
   message: string;
@@ -20,7 +25,16 @@ export interface AppSharedState {
   setError: (error: boolean) => void;
   apiCallCounter: number;
   setApiCallCounter: (apiCallCounter: number) => void;
+  isSelectAll: boolean;
+  setIsSelectAll: (isSelectAll: boolean) => void;
   dogsAPI: string;
+  dogBreedsContainer: { name: string; checked: boolean }[];
+  setDogBreedsContainer: (
+    dogBreedsContainer: {
+      name: string;
+      checked: boolean;
+    }[]
+  ) => void;
 }
 
 const AppContext = createContext<AppSharedState>({} as AppSharedState);
@@ -33,6 +47,8 @@ const AppSharedState = () => {
   const [breed, setBreed] = useState("");
   const [error, setError] = useState(false);
   const [apiCallCounter, setApiCallCounter] = useState(0);
+  const [isSelectAll, setIsSelectAll] = useState(true);
+  const [dogBreedsContainer, setDogBreedsContainer] = useState(initDogBreeds);
   const dogsAPI = `https://dog.ceo/api/breed/${breed}/images/random`;
 
   return {
@@ -50,6 +66,10 @@ const AppSharedState = () => {
     setError,
     apiCallCounter,
     setApiCallCounter,
+    isSelectAll,
+    setIsSelectAll,
+    dogBreedsContainer,
+    setDogBreedsContainer,
     dogsAPI,
   };
 };

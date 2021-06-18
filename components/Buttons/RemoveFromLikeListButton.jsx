@@ -8,7 +8,6 @@ export const RemoveFromLikeListButton = ({ image }) => {
   const { likedDogs, setLikedDogs } = useAppContext();
 
   const removeFromLikeList = (e) => {
-    console.log(e);
     setLikedDogs(likedDogs.filter((dog) => dog.image !== image));
   };
 
