@@ -22,7 +22,7 @@
   transition: all 0.2s;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
   .headerButton {
     padding: 0.5rem 1rem;
     text-align: center;
