@@ -6,10 +6,18 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
+import { useAppContext } from "../../context";
 import style from "./KebabMenu.module.css";
 
 export const KebabMenu = () => {
   const router = useRouter();
+  const { dogs, likedDogs } = useAppContext();
+
+  const numberOfFetchedDogs = dogs.length;
+  const numberOfLikedDogs = likedDogs.length;
+  let fetchedDogTitle = `🐕 ${numberOfFetchedDogs}`;
+  let likedDogsTitle = `❤️ ${numberOfLikedDogs}`;
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -21,12 +29,15 @@ export const KebabMenu = () => {
     setAnchorEl(null);
   };
 
-  const openAboutPage = () => {
+  const openPage = (routerPath: string) => {
     handleClose();
-    router.push("/about");
+    router.push(routerPath);
   };
 
-  const options = ["Select breeds", "About"];
+  const options = [
+    { name: "Select breeds", path: "/select-breeds" },
+    { name: "About", path: "/about" },
+  ];
 
   const ITEM_HEIGHT = 48;
 
@@ -52,22 +63,19 @@ export const KebabMenu = () => {
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: "20ch",
+            width: "25ch",
           },
         }}
       >
         <div className={style.kebabOptionsContainer}>
           <div className={style.kebabOptionsHeader}>
-            <p>🐕 </p>
+            <p>{fetchedDogTitle}</p> <p>{likedDogsTitle}</p>
           </div>
 
           <div className={style.kebabOptions}>
             {options.map((option) => (
-              <MenuItem
-                key={option}
-                onClick={option === `About` ? openAboutPage : handleClose}
-              >
-                {option}
+              <MenuItem key={option.name} onClick={() => openPage(option.path)}>
+                {option.name}
               </MenuItem>
             ))}
           </div>
