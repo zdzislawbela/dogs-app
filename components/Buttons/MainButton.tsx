@@ -5,10 +5,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 
-const image = {
-  url: "/dogs-button.jpg",
-  title: "Start fetching",
-  width: "80vw",
+type props = {
+  url: string;
+  title: string;
+  href: string;
 };
 
 const useStyles = makeStyles(
@@ -22,11 +22,12 @@ const useStyles = makeStyles(
       display: "flex",
       flexWrap: "wrap",
       minWidth: 300,
-      width: "100%",
+      width: "90%",
+      padding: "1rem",
     },
     image: {
       position: "relative",
-      height: "40vh",
+      height: "20vh",
       [theme.breakpoints.down("xs")]: {
         width: "100% !important", // Overrides inline-style
         height: 100,
@@ -72,7 +73,7 @@ const useStyles = makeStyles(
       top: 0,
       bottom: 0,
       backgroundColor: theme.palette.common.black,
-      opacity: 0.4,
+      opacity: 0.5,
       transition: theme.transitions.create("opacity"),
     },
     imageTitle: {
@@ -80,6 +81,7 @@ const useStyles = makeStyles(
       padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${
         theme.spacing(1) + 6
       }px`,
+      fontSize: "1.2rem",
     },
     imageMarked: {
       height: 3,
@@ -93,25 +95,25 @@ const useStyles = makeStyles(
   })
 );
 
-export default function MainButton() {
+export default function MainButton({ title, url, href }: props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Link href='/fetch'>
+      <Link href={href}>
         <ButtonBase
           focusRipple
-          key={image.title}
+          key={title}
           className={classes.image}
           focusVisibleClassName={classes.focusVisible}
           style={{
-            width: image.width,
+            width: "80vw",
           }}
         >
           <span
             className={classes.imageSrc}
             style={{
-              backgroundImage: `url(${image.url})`,
+              backgroundImage: `url(${url})`,
             }}
           />
           <span className={classes.imageBackdrop} />
@@ -122,7 +124,7 @@ export default function MainButton() {
               color='inherit'
               className={classes.imageTitle}
             >
-              {image.title}
+              {title}
               <span className={classes.imageMarked} />
             </Typography>
           </span>

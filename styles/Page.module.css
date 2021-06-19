@@ -39,8 +39,12 @@
   text-align: center;
 }
 
-.buttonContainer {
-  border: 1px solid rgba(179, 213, 245, 0.404);
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
 .buttonForAboutPage {

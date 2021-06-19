@@ -14,11 +14,19 @@ export default function Home() {
         <link rel='icon' href='/favicon.png' />
       </Head>
       <div className={styles.main}>
-        <a href='/'>
-          <h3 className={styles.title}>Welcome to 🐕 App</h3>
-        </a>
-        <div className={styles.buttonContainer}>
-          <MainButton />
+        <h3 className={styles.title}>Welcome to 🐕 App</h3>
+
+        <div className={styles.buttonsContainer}>
+          <MainButton
+            title='Select breeds'
+            url='/dog-breeds-button.jpg'
+            href='/select-breeds'
+          />
+          <MainButton
+            title='Start fetching'
+            url='/start-fetching-button.jpg'
+            href='/fetch'
+          />
         </div>
       </div>
     </div>
