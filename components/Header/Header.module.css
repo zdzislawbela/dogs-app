@@ -1,5 +1,5 @@
 .header {
-  width: 80vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,12 +22,12 @@
   transition: all 0.2s;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 915px) {
   .headerButton {
     padding: 0.5rem 1rem;
     text-align: center;
   }
   .header {
-    width: 100%;
+    box-shadow: 15px 15px 15px 15px rgb (209, 255, 163);
   }
 }

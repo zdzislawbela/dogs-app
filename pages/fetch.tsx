@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import { FetchedDogs } from "../components/FetchedDogs/FetchedDogs";
 import { useAppContext } from "../context";
+import style from "../styles/Page.module.css";
 
 export default function Fetch() {
   const { dogs } = useAppContext();
@@ -22,8 +23,9 @@ export default function Fetch() {
         />
         <link rel='icon' href='/favicon.png' />
       </Head>
-
-      <FetchedDogs />
+      <div className={style.main}>
+        <FetchedDogs />
+      </div>
     </div>
   );
 }
