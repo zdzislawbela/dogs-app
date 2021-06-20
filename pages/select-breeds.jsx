@@ -1,9 +1,11 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { useAppContext } from "../context";
 
-import { BreedCheckbox } from "../BreedCheckbox/BreedCheckbox";
+import { BreedCheckbox } from "../components/BreedCheckbox/BreedCheckbox";
+import { SearchBreedInput } from "../components/SearchBreedInput/SearchBreedInput";
+
 import styles from "../styles/Page.module.css";
 
 export default function SelectBreeds() {
@@ -43,6 +45,7 @@ export default function SelectBreeds() {
         <link rel='icon' href='/favicon.png' />
       </Head>
       <div className={styles.breeds}>
+        <SearchBreedInput />
         <p>Select breeds you'd like to fetch </p>
         <div className={styles.breed}>
           <BreedCheckbox
