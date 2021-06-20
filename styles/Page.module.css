@@ -82,7 +82,7 @@
 .breed {
   display: flex;
 
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0 1rem;
   border-bottom: rgba(0, 0, 255, 0.253) 1px solid;
 }
@@ -140,5 +140,8 @@
     line-height: 1.15;
     font-size: 2rem;
     margin-bottom: 1rem;
+  }
+  .breeds {
+    width: 100%;
   }
 }

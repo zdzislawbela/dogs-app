@@ -1,0 +1,9 @@
+.breedCheckbox {
+  margin-left: 1rem;
+}
+
+@media (max-width: 720px) {
+  .breedCheckbox > * {
+    font-size: 0.8rem;
+  }
+}
