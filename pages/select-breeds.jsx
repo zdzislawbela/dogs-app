@@ -5,6 +5,7 @@ import { useAppContext } from "../context";
 
 import { BreedCheckbox } from "../components/BreedCheckbox/BreedCheckbox";
 import { SearchBreedInput } from "../components/SearchBreedInput/SearchBreedInput";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 import styles from "../styles/Page.module.css";
 
@@ -14,17 +15,37 @@ export default function SelectBreeds() {
     setDogBreedsContainer,
     isSelectAll,
     setIsSelectAll,
+    setBreedsChanged,
   } = useAppContext();
 
+  const [breedsToStorage, setBreedsToStorage] = useLocalStorage(
+    "selectedBreeds",
+    ""
+  );
+  const storageIsEmpty = breedsToStorage === "empty";
+
   const handleSelectAll = () => {
+    setBreedsChanged(true);
     setIsSelectAll(!isSelectAll);
     const selectedBreeds = dogBreedsContainer.map(({ name }) => {
       return { name: name, checked: !isSelectAll };
     });
+
+    if (!isSelectAll) {
+      const breedsToStorageArray = dogBreedsContainer.map((breed) => {
+        return breed.name;
+      });
+      const selectedBreedsString = breedsToStorageArray.join(",");
+      setBreedsToStorage(selectedBreedsString);
+    }
+    if (isSelectAll) {
+      setBreedsToStorage("empty");
+    }
     setDogBreedsContainer(selectedBreeds);
   };
 
   const handleBreedCheckbox = (option) => {
+    setBreedsChanged(true);
     const selectedBreeds = dogBreedsContainer.map(({ name, checked }) => {
       if (name === option) {
         return { name: name, checked: !checked };
@@ -32,6 +53,46 @@ export default function SelectBreeds() {
       return { name: name, checked: checked };
     });
     setDogBreedsContainer(selectedBreeds);
+
+    const storageExist = window.localStorage.getItem("selectedBreeds");
+
+    const initialStorageWithoutSelected = (option) => {
+      const breedsToStorageArray = dogBreedsContainer.map((breed) => {
+        return breed.name;
+      });
+      const selectedBreed = (breed) => breed !== option;
+      const filteredBreeds = breedsToStorageArray.filter(selectedBreed);
+      const selectedBreedsString = filteredBreeds.join(",");
+      setBreedsToStorage(selectedBreedsString);
+    };
+
+    const excludeFromStorage = (option) => {
+      const breedsToStorageArray = breedsToStorage.split(",");
+      const selectedBreed = (breed) => breed !== option;
+      const filteredBreeds = breedsToStorageArray.filter(selectedBreed);
+      const selectedBreedsString = filteredBreeds.join(",");
+      setBreedsToStorage(selectedBreedsString);
+    };
+
+    const includeToStorage = (option) => {
+      const breedsToStorageArrya = breedsToStorage.split(",");
+      breedsToStorageArrya.push(option);
+      breedsToStorageArrya.sort();
+      const selectedBreedsString = breedsToStorageArrya.join(",");
+      setBreedsToStorage(selectedBreedsString);
+    };
+
+    if (!storageExist) {
+      initialStorageWithoutSelected(option);
+    } else {
+      if (breedsToStorage.includes(option)) {
+        excludeFromStorage(option);
+      }
+
+      if (!breedsToStorage.includes(option)) {
+        includeToStorage(option);
+      }
+    }
   };
 
   return (
@@ -51,16 +112,32 @@ export default function SelectBreeds() {
           <BreedCheckbox
             handleCheckbox={handleSelectAll}
             breed='Select All'
-            isChecked={isSelectAll}
+            isChecked={!storageIsEmpty && isSelectAll}
           />
         </div>
         {dogBreedsContainer.map(({ name, checked }) => {
+          let isChechedWithStorage = true;
+
+          const localStorageIncludes = breedsToStorage.includes(name);
+
+          if (storageIsEmpty) {
+            isChechedWithStorage = false;
+          }
+
+          if (localStorageIncludes) {
+            isChechedWithStorage = true;
+          }
+
+          if (!localStorageIncludes) {
+            isChechedWithStorage = false;
+          }
+
           return (
             <div key={name} className={styles.breed}>
               <BreedCheckbox
                 handleCheckbox={handleBreedCheckbox}
                 breed={name}
-                isChecked={checked}
+                isChecked={isChechedWithStorage}
               />
             </div>
           );

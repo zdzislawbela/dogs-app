@@ -35,6 +35,8 @@ export interface AppSharedState {
       checked: boolean;
     }[]
   ) => void;
+  breedsChanged: boolean;
+  setBreedsChanged: (changed: boolean) => void;
 }
 
 const AppContext = createContext<AppSharedState>({} as AppSharedState);
@@ -49,6 +51,7 @@ const AppSharedState = () => {
   const [apiCallCounter, setApiCallCounter] = useState(0);
   const [isSelectAll, setIsSelectAll] = useState(true);
   const [dogBreedsContainer, setDogBreedsContainer] = useState(initDogBreeds);
+  const [breedsChanged, setBreedsChanged] = useState(false);
   const dogsAPI = `https://dog.ceo/api/breed/${breed}/images/random`;
 
   return {
@@ -70,6 +73,8 @@ const AppSharedState = () => {
     setIsSelectAll,
     dogBreedsContainer,
     setDogBreedsContainer,
+    breedsChanged,
+    setBreedsChanged,
     dogsAPI,
   };
 };
