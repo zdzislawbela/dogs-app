@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 
 import { useAppContext } from "../../context";
 import { HeartButton } from "../Buttons/HeartButton/HeartButton";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
 import styles from "./FetchedDogs.module.css";
 
@@ -91,32 +92,43 @@ export const FetchedDogs = () => {
   }, [dogsAPI]);
 
   return (
-    <div className={styles.container}>
-      {dogs &&
-        dogs.map((dog) => {
-          const breedTitle = dog.message.slice(
-            30,
-            getPosition(dog.message, "/", 5)
-          );
+    <div className={styles.dogsContainer}>
+      <div className={styles.container}>
+        {dogs &&
+          dogs.map((dog, index) => {
+            const breedTitle = dog.message.slice(
+              30,
+              getPosition(dog.message, "/", 5)
+            );
 
-          return (
-            <div key={dog.message} className={styles.dog}>
-              <img className={styles.dogImg} src={dog.message} alt='dog' />
-              <div className={styles.dogTitle}>
-                <div className={styles.heart}>
-                  <HeartButton image={dog.message} breed={breedTitle} />{" "}
-                </div>
-                <div className={styles.title}>
-                  <p>{breedTitle}</p>
+            return (
+              <div
+                key={dog.message}
+                className={styles.dog}
+                ref={dogs.length === index + 1 ? lastBookElementRef : null}
+              >
+                <img className={styles.dogImg} src={dog.message} alt='dog' />
+
+                <div className={styles.titleContainer}>
+                  <div className={styles.heart}>
+                    <HeartButton image={dog.message} breed={breedTitle} />{" "}
+                  </div>
+                  <p className={styles.title}>{breedTitle}</p>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
 
-      <div>
-        <div className={styles.loading} ref={lastBookElementRef}>
-          {error && `${error}`} Loading...
+        <div className={styles.dog}>
+          <div className={styles.dogImg}>
+            <img
+              className={styles.dogImg}
+              src='/loading-dog.jpg'
+              alt='loading img placeholder'
+            />
+            <LoadingSpinner />
+          </div>
+          <div className={styles.titleContainer}></div>
         </div>
       </div>
     </div>
