@@ -32,8 +32,12 @@ export const FetchedDogs = () => {
 
   let userSelectedBreeds = dogBreedsContainer
     .map((breed) => {
+      const storageIsNoSelection = breedsToStorage === "no-selection";
+      const storageIsEmptyString = breedsToStorage == "";
       const localStorageIncludes = breedsToStorage.includes(breed.name);
-
+      if (storageIsEmptyString) {
+        return breed.name;
+      }
       if (localStorageIncludes) {
         return breed.name;
       }
@@ -44,12 +48,12 @@ export const FetchedDogs = () => {
 
   const getRandomBreed = () => {
     setRandom(Math.floor(Math.random() * userSelectedBreeds.length));
-
     if ((random === 0) | (random === 1)) {
       setRandom(-1);
     }
-
-    return setBreed(userSelectedBreeds[random]);
+    return setBreed(
+      userSelectedBreeds[random] !== undefined ? userSelectedBreeds[random] : ""
+    );
   };
 
   const lastBookElementRef = useCallback(

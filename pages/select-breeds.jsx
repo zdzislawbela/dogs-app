@@ -23,7 +23,8 @@ export default function SelectBreeds() {
     "selectedBreeds",
     ""
   );
-  const storageIsEmpty = breedsToStorage === "empty";
+  const storageIsNoSelection = breedsToStorage === "no-selection";
+  const storageIsEmptyString = breedsToStorage == "";
 
   const handleSelectAll = () => {
     setDogs([]);
@@ -41,7 +42,7 @@ export default function SelectBreeds() {
       setBreedsToStorage(selectedBreedsString);
     }
     if (isSelectAll) {
-      setBreedsToStorage("empty");
+      setBreedsToStorage("no-selection");
     }
     setDogBreedsContainer(selectedBreeds);
   };
@@ -115,24 +116,30 @@ export default function SelectBreeds() {
           <BreedCheckbox
             handleCheckbox={handleSelectAll}
             breed='Select All'
-            isChecked={!storageIsEmpty && isSelectAll}
+            isChecked={isSelectAll}
           />
         </div>
         {dogBreedsContainer.map(({ name, checked }) => {
           let isChechedWithStorage = true;
 
-          const localStorageIncludes = breedsToStorage.includes(name);
+          if (storageIsEmptyString) {
+            if (checked) {
+              isChechedWithStorage = true;
+            }
 
-          if (storageIsEmpty) {
-            isChechedWithStorage = false;
-          }
+            if (!checked) {
+              isChechedWithStorage = false;
+            }
+          } else {
+            const localStorageIncludes = breedsToStorage.includes(name);
 
-          if (localStorageIncludes) {
-            isChechedWithStorage = true;
-          }
+            if (localStorageIncludes) {
+              isChechedWithStorage = true;
+            }
 
-          if (!localStorageIncludes) {
-            isChechedWithStorage = false;
+            if (!localStorageIncludes) {
+              isChechedWithStorage = false;
+            }
           }
 
           return (
