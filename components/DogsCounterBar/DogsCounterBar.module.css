@@ -27,7 +27,7 @@
 @media only screen and (max-width: 915px) {
   .counterSideBar {
     position: fixed;
-    top: 90%;
+    top: 85%;
     left: 0;
     display: flex;
     flex-direction: row;
