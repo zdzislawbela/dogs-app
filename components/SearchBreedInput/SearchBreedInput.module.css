@@ -1,0 +1,28 @@
+.inputContainer {
+  position: sticky;
+  top: 50px;
+  z-index: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+  background-color: rgb(248, 245, 245);
+  border: rgb(243, 241, 241) solid 1px;
+}
+
+.loupeContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 100%;
+}
+
+.loupe {
+  width: 0.8rem;
+  height: 0.8rem;
+}

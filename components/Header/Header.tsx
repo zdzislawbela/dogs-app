@@ -24,6 +24,7 @@ export const Header = () => {
           <a> Liked ❤️</a>
         </button>
       </Link>
+      |
       <KebabMenu />
     </div>
   );

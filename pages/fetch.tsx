@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import { FetchedDogs } from "../components/FetchedDogs/FetchedDogs";
+import { DogsCounterBar } from "../components/DogsCounterBar/DogsCounterBar";
 import { useAppContext } from "../context";
 import style from "../styles/Page.module.css";
 
@@ -25,6 +26,7 @@ export default function Fetch() {
       </Head>
       <div className={style.main}>
         <FetchedDogs />
+        <DogsCounterBar />
       </div>
     </div>
   );

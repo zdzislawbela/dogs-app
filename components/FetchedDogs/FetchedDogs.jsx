@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 import { useAppContext } from "../../context";
 import { HeartButton } from "../Buttons/HeartButton/HeartButton";
@@ -18,17 +19,24 @@ export const FetchedDogs = () => {
     setError,
     setApiCallCounter,
     dogBreedsContainer,
+    breedsChanged,
+    setBreedsChanged,
     dogsAPI,
   } = useAppContext();
 
   const [random, setRandom] = useState(0);
 
+  const [breedsToStorage] = useLocalStorage("selectedBreeds", "");
+
   const observer = useRef();
 
-  const userSelectedBreeds = dogBreedsContainer
+  let userSelectedBreeds = dogBreedsContainer
     .map((breed) => {
-      if (breed.checked) return breed.name;
-      return;
+      const localStorageIncludes = breedsToStorage.includes(breed.name);
+
+      if (localStorageIncludes) {
+        return breed.name;
+      }
     })
     .filter((name) => {
       return name != undefined;
@@ -110,9 +118,8 @@ export const FetchedDogs = () => {
                 <img className={styles.dogImg} src={dog.message} alt='dog' />
 
                 <div className={styles.titleContainer}>
-                  <div className={styles.heart}>
-                    <HeartButton image={dog.message} breed={breedTitle} />{" "}
-                  </div>
+                  <HeartButton image={dog.message} breed={breedTitle} />
+
                   <p className={styles.title}>{breedTitle}</p>
                 </div>
               </div>
