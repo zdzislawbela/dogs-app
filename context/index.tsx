@@ -17,8 +17,6 @@ export interface AppSharedState {
   setDogs: (dogs: DogDetails[]) => void;
   likedDogs: DogDetails[];
   setLikedDogs: (dogs: DogDetails[]) => void;
-  isModalOpen: boolean;
-  setIsModalOpen: (isModalOpen: boolean) => void;
   breed: string;
   setBreed: (breed: string) => void;
   error: boolean;
@@ -45,7 +43,6 @@ const AppSharedState = () => {
   const [loading, setLoading] = useState(true);
   const [dogs, setDogs] = useState([] as DogDetails[]);
   const [likedDogs, setLikedDogs] = useState([] as DogDetails[]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [breed, setBreed] = useState("");
   const [error, setError] = useState(false);
   const [apiCallCounter, setApiCallCounter] = useState(0);
@@ -61,8 +58,6 @@ const AppSharedState = () => {
     setDogs,
     likedDogs,
     setLikedDogs,
-    isModalOpen,
-    setIsModalOpen,
     breed,
     setBreed,
     error,

@@ -118,9 +118,8 @@ export const FetchedDogs = () => {
                 <img className={styles.dogImg} src={dog.message} alt='dog' />
 
                 <div className={styles.titleContainer}>
-                  <div className={styles.heart}>
-                    <HeartButton image={dog.message} breed={breedTitle} />{" "}
-                  </div>
+                  <HeartButton image={dog.message} breed={breedTitle} />
+
                   <p className={styles.title}>{breedTitle}</p>
                 </div>
               </div>

@@ -11,6 +11,7 @@ import styles from "../styles/Page.module.css";
 
 export default function SelectBreeds() {
   const {
+    setDogs,
     dogBreedsContainer,
     setDogBreedsContainer,
     isSelectAll,
@@ -25,6 +26,7 @@ export default function SelectBreeds() {
   const storageIsEmpty = breedsToStorage === "empty";
 
   const handleSelectAll = () => {
+    setDogs([]);
     setBreedsChanged(true);
     setIsSelectAll(!isSelectAll);
     const selectedBreeds = dogBreedsContainer.map(({ name }) => {
@@ -45,6 +47,7 @@ export default function SelectBreeds() {
   };
 
   const handleBreedCheckbox = (option) => {
+    setDogs([]);
     setBreedsChanged(true);
     const selectedBreeds = dogBreedsContainer.map(({ name, checked }) => {
       if (name === option) {
