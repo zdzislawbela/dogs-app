@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 
-import { useAppContext } from "../../context";
+import { KebabIcon } from "./KebabIcon";
+
 import style from "./KebabMenu.module.css";
 
 export const KebabMenu = () => {
   const router = useRouter();
-  const { dogs, likedDogs } = useAppContext();
-
-  const numberOfFetchedDogs = dogs.length;
-  const numberOfLikedDogs = likedDogs.length;
-  let fetchedDogTitle = `🐕 ${numberOfFetchedDogs}`;
-  let likedDogsTitle = `❤️ ${numberOfLikedDogs}`;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -42,15 +35,15 @@ export const KebabMenu = () => {
   const ITEM_HEIGHT = 48;
 
   return (
-    <>
+    <button className={`${style.headerButton} ${style.kebab}`}>
       <IconButton
         aria-label='more'
         aria-controls='long-menu'
         aria-haspopup='true'
         onClick={handleClick}
-        color='primary'
+        color='default'
       >
-        <MoreVertIcon />
+        <KebabIcon />
       </IconButton>
 
       <Menu
@@ -62,16 +55,12 @@ export const KebabMenu = () => {
         onClose={handleClose}
         PaperProps={{
           style: {
-            maxHeight: ITEM_HEIGHT * 4.5,
+            maxHeight: ITEM_HEIGHT * 4,
             width: "25ch",
           },
         }}
       >
         <div className={style.kebabOptionsContainer}>
-          <div className={style.kebabOptionsHeader}>
-            <p>{fetchedDogTitle}</p> <p>{likedDogsTitle}</p>
-          </div>
-
           <div className={style.kebabOptions}>
             {options.map((option) => (
               <MenuItem key={option.name} onClick={() => openPage(option.path)}>
@@ -81,6 +70,6 @@ export const KebabMenu = () => {
           </div>
         </div>
       </Menu>
-    </>
+    </button>
   );
 };
