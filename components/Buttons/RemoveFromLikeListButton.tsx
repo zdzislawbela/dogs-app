@@ -4,11 +4,15 @@ import { useAppContext } from "../../context";
 
 import styles from "./RemoveFromLikeListButton.module.css";
 
-export const RemoveFromLikeListButton = ({ image }) => {
+type Props = {
+  message: string;
+};
+
+export const RemoveFromLikeListButton = ({ message }: Props) => {
   const { likedDogs, setLikedDogs } = useAppContext();
 
-  const removeFromLikeList = (e) => {
-    setLikedDogs(likedDogs.filter((dog) => dog.image !== image));
+  const removeFromLikeList = () => {
+    setLikedDogs(likedDogs.filter((dog) => dog.message !== message));
   };
 
   return (

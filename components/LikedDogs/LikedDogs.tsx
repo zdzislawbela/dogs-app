@@ -22,7 +22,7 @@ export const LikedDogs = () => {
                 <div className={styles.title}>
                   <p>{dog.breed}</p>
                 </div>
-                <RemoveFromLikeListButton image={dog.message} />
+                <RemoveFromLikeListButton message={dog.message} />
               </div>
             </div>
           );
