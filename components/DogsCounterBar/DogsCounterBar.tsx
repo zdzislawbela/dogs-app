@@ -4,17 +4,17 @@ import { useAppContext } from "../../context";
 import style from "./DogsCounterBar.module.css";
 
 export const DogsCounterBar = () => {
-  const { dogs, likedDogs } = useAppContext();
+  const { fetchedDogs, likedDogs } = useAppContext();
   const [fetchedDogTitle, setFetchedDogTitle] = useState("");
   const [likedDogsTitle, setLikedDogsTitle] = useState("");
 
   useEffect(() => {
-    const numberOfFetchedDogs = dogs.length;
+    const numberOfFetchedDogs = fetchedDogs.length;
     const numberOfLikedDogs = likedDogs.length;
 
     setFetchedDogTitle(`🐕 ${numberOfFetchedDogs}`);
     setLikedDogsTitle(`❤️ ${numberOfLikedDogs}`);
-  }, [dogs, likedDogs]);
+  }, [fetchedDogs, likedDogs]);
 
   return (
     <div className={style.counterSideBar}>
