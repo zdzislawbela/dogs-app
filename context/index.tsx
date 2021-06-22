@@ -1,76 +1,78 @@
 import React, { createContext, useContext, useState, FC } from "react";
-import { dogBreeds } from "../data/dogbreeds";
-
-const initDogBreeds = dogBreeds.map((dog) => {
-  return { name: dog, checked: true };
-});
+import { breedsData } from "../data/breedsData";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export type DogDetails = {
   message: string;
   status: string;
+};
+
+export type DogsDetails = {
+  message: string;
+  status: string;
+}[];
+
+export type likedDogsDetails = {
+  message: string;
+  breed: string;
 }[];
 
 export interface AppSharedState {
   loading: boolean;
   setLoading: (loading: boolean) => void;
-  dogs: DogDetails[];
-  setDogs: (dogs: DogDetails[]) => void;
-  likedDogs: DogDetails[];
-  setLikedDogs: (dogs: DogDetails[]) => void;
-  breed: string;
-  setBreed: (breed: string) => void;
-  error: boolean;
-  setError: (error: boolean) => void;
+  isError: string | boolean;
+  setIsError: (isError: string | boolean) => void;
+
+  fetchedDogs: DogsDetails;
+  setFetchedDogs: (fetchedDogs: DogsDetails) => void;
+  likedDogs: likedDogsDetails;
+  setLikedDogs: (likedDogs: likedDogsDetails) => void;
+
   apiCallCounter: number;
   setApiCallCounter: (apiCallCounter: number) => void;
+
   isSelectAll: boolean;
   setIsSelectAll: (isSelectAll: boolean) => void;
-  dogsAPI: string;
-  dogBreedsContainer: { name: string; checked: boolean }[];
-  setDogBreedsContainer: (
-    dogBreedsContainer: {
-      name: string;
-      checked: boolean;
-    }[]
-  ) => void;
-  breedsChanged: boolean;
-  setBreedsChanged: (changed: boolean) => void;
 }
 
 const AppContext = createContext<AppSharedState>({} as AppSharedState);
 
 const AppSharedState = () => {
+  const [storagedBreeds, setStoragedBreeds] = useLocalStorage(
+    "selectedBreeds",
+    ""
+  );
+
   const [loading, setLoading] = useState(true);
-  const [dogs, setDogs] = useState([] as DogDetails[]);
-  const [likedDogs, setLikedDogs] = useState([] as DogDetails[]);
-  const [breed, setBreed] = useState("");
-  const [error, setError] = useState(false);
+  const [isError, setIsError] = useState<string | boolean>(false);
+
+  const [fetchedDogs, setFetchedDogs] = useState<DogsDetails>([]);
+  const [likedDogs, setLikedDogs] = useState<likedDogsDetails>([]);
+
   const [apiCallCounter, setApiCallCounter] = useState(0);
-  const [isSelectAll, setIsSelectAll] = useState(true);
-  const [dogBreedsContainer, setDogBreedsContainer] = useState(initDogBreeds);
-  const [breedsChanged, setBreedsChanged] = useState(false);
-  const dogsAPI = `https://dog.ceo/api/breed/${breed}/images/random`;
+  const [isSelectAll, setIsSelectAll] = useState(true); // !
+
+  const localStorageExist = typeof storagedBreeds === "object";
+
+  if (!localStorageExist) {
+    setStoragedBreeds(breedsData);
+  }
 
   return {
     loading,
     setLoading,
-    dogs,
-    setDogs,
+    isError,
+    setIsError,
+
+    fetchedDogs,
+    setFetchedDogs,
     likedDogs,
     setLikedDogs,
-    breed,
-    setBreed,
-    error,
-    setError,
+
     apiCallCounter,
     setApiCallCounter,
     isSelectAll,
     setIsSelectAll,
-    dogBreedsContainer,
-    setDogBreedsContainer,
-    breedsChanged,
-    setBreedsChanged,
-    dogsAPI,
   };
 };
 
