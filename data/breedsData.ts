@@ -1,4 +1,6 @@
-export const dogBreeds = [
+type breedsData = string[];
+
+export const breedsData: breedsData = [
   "affenpinscher",
   "african",
   "airedale",
@@ -120,5 +122,5 @@ export const dogBreeds = [
   "terrier-tibetan",
   "vizsla",
   "weimaraner",
-  "whippet"
+  "whippet",
 ];
