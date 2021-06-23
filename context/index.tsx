@@ -33,14 +33,17 @@ export interface AppSharedState {
 
   isSelectAll: boolean;
   setIsSelectAll: (isSelectAll: boolean) => void;
+
+  storagedBreeds: string[];
+  setStoragedBreeds: (breeds: string[]) => void;
 }
 
 const AppContext = createContext<AppSharedState>({} as AppSharedState);
 
 const AppSharedState = () => {
-  const [storagedBreeds, setStoragedBreeds] = useLocalStorage(
+  const [storagedBreeds, setStoragedBreeds] = useLocalStorage<string[]>(
     "selectedBreeds",
-    ""
+    breedsData
   );
 
   const [loading, setLoading] = useState(true);
@@ -50,13 +53,7 @@ const AppSharedState = () => {
   const [likedDogs, setLikedDogs] = useState<likedDogsDetails>([]);
 
   const [apiCallCounter, setApiCallCounter] = useState(0);
-  const [isSelectAll, setIsSelectAll] = useState(true); // !
-
-  const localStorageExist = typeof storagedBreeds === "object";
-
-  if (!localStorageExist) {
-    setStoragedBreeds(breedsData);
-  }
+  const [isSelectAll, setIsSelectAll] = useState(true);
 
   return {
     loading,
@@ -73,6 +70,9 @@ const AppSharedState = () => {
     setApiCallCounter,
     isSelectAll,
     setIsSelectAll,
+
+    storagedBreeds,
+    setStoragedBreeds,
   };
 };
 

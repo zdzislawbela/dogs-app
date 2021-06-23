@@ -1,6 +1,4 @@
-type breedsData = string[];
-
-export const breedsData: breedsData = [
+export const breedsData = [
   "affenpinscher",
   "african",
   "airedale",
@@ -124,3 +122,6 @@ export const breedsData: breedsData = [
   "weimaraner",
   "whippet",
 ];
+
+export type Breed = typeof breedsData[number];
+export type Breeds = typeof breedsData | [];

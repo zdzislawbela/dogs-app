@@ -1,21 +1,21 @@
 import Head from "next/head";
 import React from "react";
-import { breedsData } from "../data/breedsData";
+import { Breed, breedsData } from "../data/breedsData";
 import { useAppContext } from "../context";
 
 import { BreedCheckbox } from "../components/BreedCheckbox/BreedCheckbox";
 import { SearchBreedInput } from "../components/SearchBreedInput/SearchBreedInput";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 
 import styles from "../styles/Page.module.css";
 
 export default function SelectBreeds() {
-  const { setFetchedDogs, isSelectAll, setIsSelectAll } = useAppContext();
-
-  const [storagedBreeds, setStoragedBreeds] = useLocalStorage(
-    "selectedBreeds",
-    ""
-  );
+  const {
+    setFetchedDogs,
+    isSelectAll,
+    setIsSelectAll,
+    storagedBreeds,
+    setStoragedBreeds,
+  } = useAppContext();
 
   const handleSelectAll = () => {
     setFetchedDogs([]);
@@ -30,19 +30,17 @@ export default function SelectBreeds() {
     }
   };
 
-  const handleBreedCheckbox = (option: string) => {
+  const handleBreedCheckbox = (option: Breed) => {
     setFetchedDogs([]);
 
-    const excludeFromStorage = (option: string) => {
-      const select = (breed: string) => breed !== option;
-      const filteredBreeds = storagedBreeds.filter(select);
+    const excludeFromStorage = (option: Breed) => {
+      const filteredBreeds = storagedBreeds.filter((breed) => breed !== option);
       setStoragedBreeds(filteredBreeds);
     };
 
-    const includeToStorage = (option: string) => {
-      storagedBreeds.push(option);
-      storagedBreeds.sort();
-      setStoragedBreeds(storagedBreeds);
+    const includeToStorage = (option: Breed) => {
+      const extendedBreeds = [...storagedBreeds, option].sort();
+      setStoragedBreeds(extendedBreeds);
     };
 
     const isBreedSelected = storagedBreeds.includes(option);

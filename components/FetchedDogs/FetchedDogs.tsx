@@ -7,6 +7,7 @@ import { HeartButton } from "../Buttons/HeartButton/HeartButton";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
 import styles from "./FetchedDogs.module.css";
+import { Breed } from "../../data/breedsData";
 
 export const FetchedDogs = () => {
   const {
@@ -19,9 +20,9 @@ export const FetchedDogs = () => {
     setApiCallCounter,
   } = useAppContext();
 
-  const [breed, setBreed] = useState("");
+  const [breed, setBreed] = useState<Breed>();
   const [random, setRandom] = useState(0);
-  const [storagedBreeds] = useLocalStorage("selectedBreeds", "");
+  const [storagedBreeds] = useLocalStorage<Breed[]>("selectedBreeds", []);
 
   const observer = useRef<null | IntersectionObserver>(null);
 
@@ -104,7 +105,7 @@ export const FetchedDogs = () => {
               <div
                 key={dog.message}
                 className={styles.dog}
-                ref={useIntersectionObserver}
+                ref={isLast ? useIntersectionObserver : undefined}
               >
                 <img className={styles.dogImg} src={dog.message} alt='dog' />
 
