@@ -46,12 +46,14 @@ const AppSharedState = () => {
     breedsData
   );
 
+  const [likedDogs, setLikedDogs] = useLocalStorage<likedDogsDetails>(
+    "likedDogs",
+    []
+  );
+
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState<string | boolean>(false);
-
   const [fetchedDogs, setFetchedDogs] = useState<DogsDetails>([]);
-  const [likedDogs, setLikedDogs] = useState<likedDogsDetails>([]);
-
   const [apiCallCounter, setApiCallCounter] = useState(0);
   const [isSelectAll, setIsSelectAll] = useState(true);
 
@@ -60,17 +62,14 @@ const AppSharedState = () => {
     setLoading,
     isError,
     setIsError,
-
     fetchedDogs,
     setFetchedDogs,
     likedDogs,
     setLikedDogs,
-
     apiCallCounter,
     setApiCallCounter,
     isSelectAll,
     setIsSelectAll,
-
     storagedBreeds,
     setStoragedBreeds,
   };

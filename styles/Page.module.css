@@ -130,7 +130,22 @@
   background: rgb(247, 247, 247);
 }
 
+.likedDogsContainer {
+  padding: 3.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+}
+
 @media (max-width: 650px) {
+  .likedDogsContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
   .grid {
     width: 100%;
     flex-direction: column;

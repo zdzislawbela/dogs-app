@@ -21,12 +21,12 @@ export default function Liked() {
         />
         <link rel='icon' href='/favicon.png' />
       </Head>{" "}
-      <ParticleBackground />
-      {likedDogs.length !== 0 ? (
-        <LikedDogs />
-      ) : (
-        <>
-          <div className={styles.container}>
+      <ParticleBackground />{" "}
+      <div className={styles.likedDogsContainer}>
+        {likedDogs.length !== 0 ? (
+          <LikedDogs />
+        ) : (
+          <>
             Go to Fetch Tab and click:
             <Image
               src='/heart.png'
@@ -34,9 +34,9 @@ export default function Liked() {
               width={24}
               height={24}
             />
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </>
   );
 }

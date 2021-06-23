@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { useAppContext } from "../../context";
 import { RemoveFromLikeListButton } from "../Buttons/RemoveFromLikeListButton";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
 import styles from "./LikedDogs.module.css";
 
 export const LikedDogs = () => {
   const { likedDogs } = useAppContext();
+  const [likedDogsState, setLikedDogsState] = useState(likedDogs);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const timeoutID = window.setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => window.clearTimeout(timeoutID);
+  }, [likedDogsState]);
 
   return (
-    <div className={styles.container}>
-      {likedDogs &&
-        likedDogs.map((dog, index) => {
+    <>
+      {loading && <LoadingSpinner />}
+      {!loading &&
+        likedDogsState &&
+        likedDogsState.map((dog, index) => {
           return (
             <div key={`${dog.message}${index}`} className={styles.dog}>
               <div className={styles.imgContainer}>
@@ -27,6 +41,6 @@ export const LikedDogs = () => {
             </div>
           );
         })}
-    </div>
+    </>
   );
 };
