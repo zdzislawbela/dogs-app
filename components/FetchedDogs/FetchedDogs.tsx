@@ -101,6 +101,7 @@ export const FetchedDogs = () => {
               getPosition(dog.message, "/", 5)
             );
             const isLast = fetchedDogs.length === index + 1;
+
             return (
               <div
                 key={dog.message}
@@ -118,7 +119,7 @@ export const FetchedDogs = () => {
             );
           })}
 
-        <div className={styles.dog} ref={useIntersectionObserver}>
+        <div className={styles.dog}>
           <div className={styles.dogImg}>
             <img
               className={styles.dogImg}
