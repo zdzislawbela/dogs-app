@@ -9,6 +9,11 @@ import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import styles from "./FetchedDogs.module.css";
 import { Breed } from "../../data/breedsData";
 
+type fetchedDog = {
+  message: string;
+  status: string;
+};
+
 export const FetchedDogs = () => {
   const {
     loading,
@@ -64,6 +69,7 @@ export const FetchedDogs = () => {
     setIsError(false);
 
     const fetchDog = async () => {
+      const timeInMs = Date.now();
       if (breed !== undefined) {
         const response = await fetch(
           `https://dog.ceo/api/breed/${breed}/images/random`
@@ -72,8 +78,20 @@ export const FetchedDogs = () => {
         if (response.status !== 200) {
           return setIsError("Something goes wrong. Please try again.");
         }
-        const newDog: DogDetails = await response.json();
+        const fetchedDog: fetchedDog = await response.json();
+
+        const newDog: DogDetails = {
+          status: fetchedDog.status,
+          breedName: fetchedDog.message.slice(
+            30,
+            getPosition(fetchedDog.message, "/", 5)
+          ),
+          image: fetchedDog.message,
+          time: timeInMs,
+        };
+
         const addNewDog: DogsDetails = [...fetchedDogs, newDog];
+
         setFetchedDogs(addNewDog);
 
         const addAPICall: number = apiCallCounter + 1;
@@ -96,24 +114,19 @@ export const FetchedDogs = () => {
       <div className={styles.container}>
         {fetchedDogs &&
           fetchedDogs.map((dog, index) => {
-            const breedTitle = dog.message.slice(
-              30,
-              getPosition(dog.message, "/", 5)
-            );
             const isLast = fetchedDogs.length === index + 1;
-
             return (
               <div
-                key={dog.message}
+                key={`${dog.time}|${dog.image}`}
                 className={styles.dog}
                 ref={isLast ? useIntersectionObserver : undefined}
               >
-                <img className={styles.dogImg} src={dog.message} alt='dog' />
+                <img className={styles.dogImg} src={dog.image} alt='dog' />
 
                 <div className={styles.titleContainer}>
-                  <HeartButton message={dog.message} breed={breedTitle} />
+                  <HeartButton image={dog.image} breed={dog.breedName} />
 
-                  <p className={styles.title}>{breedTitle}</p>
+                  <p className={styles.title}>{dog.breedName}</p>
                 </div>
               </div>
             );

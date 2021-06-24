@@ -4,24 +4,24 @@ import { likedDogsDetails, useAppContext } from "../../../context";
 import style from "./HeartButton.module.css";
 
 type HeartButton = {
-  message: string;
+  image: string;
   breed: string;
 };
 
-export const HeartButton = ({ message, breed }: HeartButton) => {
+export const HeartButton = ({ image, breed }: HeartButton) => {
   const { likedDogs, setLikedDogs } = useAppContext();
 
-  const messages = likedDogs.map((dog) => dog.message);
-  const isLiked = messages.includes(message);
+  const images = likedDogs.map((dog) => dog.image);
+  const isLiked = images.includes(image);
 
   const handleLikeButton = () => {
     if (isLiked) {
-      setLikedDogs(likedDogs.filter((dog) => dog.message !== message));
+      setLikedDogs(likedDogs.filter((dog) => dog.image !== image));
       return;
     }
-    const likedDog = { message, breed };
-    const addLikedDog: likedDogsDetails = [...likedDogs, likedDog];
-    setLikedDogs(addLikedDog);
+    const newLikedDog = { image, breed };
+    const newLikedDogs: likedDogsDetails = [...likedDogs, newLikedDog];
+    setLikedDogs(newLikedDogs);
   };
 
   return (

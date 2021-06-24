@@ -1,19 +1,18 @@
 import React, { createContext, useContext, useState, FC } from "react";
-import { breedsData } from "../data/breedsData";
+import { Breed, breedsData } from "../data/breedsData";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export type DogDetails = {
-  message: string;
   status: string;
+  image: string;
+  breedName: Breed;
+  time: number;
 };
 
-export type DogsDetails = {
-  message: string;
-  status: string;
-}[];
+export type DogsDetails = DogDetails[];
 
 export type likedDogsDetails = {
-  message: string;
+  image: string;
   breed: string;
 }[];
 
@@ -50,6 +49,18 @@ const AppSharedState = () => {
     "likedDogs",
     []
   );
+
+  if (typeof window !== "undefined") {
+    const storagedBreedsExists = window.localStorage.getItem("selectedBreeds");
+    if (!storagedBreedsExists) {
+      setStoragedBreeds(breedsData);
+    }
+
+    const likedDogsExists = window.localStorage.getItem("likedDogs");
+    if (!likedDogsExists) {
+      setLikedDogs([]);
+    }
+  }
 
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState<string | boolean>(false);
