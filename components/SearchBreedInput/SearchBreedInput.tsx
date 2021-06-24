@@ -9,8 +9,9 @@ export const SearchBreedInput = ({ filterBreeds }: Props) => {
   const [search, setSearch] = useState("");
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setSearch(e.currentTarget.value);
-    filterBreeds(e.currentTarget.value);
+    const keyword = e.currentTarget.value.toLowerCase();
+    setSearch(keyword);
+    filterBreeds(keyword);
   };
 
   const handleDeleteText = () => {
