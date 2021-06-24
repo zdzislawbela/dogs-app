@@ -8,7 +8,13 @@ type Props = {
 export const MinimizeButton = ({ handleCloseModal }: Props) => {
   return (
     <button className={style.minimizeButton} onClick={handleCloseModal}>
-      <img src='/minimize.png' alt='minimize' width={26} height={26} />
+      <img
+        className={style.img}
+        src='/minimize.png'
+        alt='minimize'
+        width={28}
+        height={28}
+      />
     </button>
   );
 };

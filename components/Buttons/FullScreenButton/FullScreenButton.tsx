@@ -17,7 +17,13 @@ export const FullScreenButton = ({
       className={style.fullScreenButton}
       onClick={() => handleModalOpening(image, breed)}
     >
-      <img src='/fullscreen.png' alt='fullscreen' width={26} height={26} />
+      <img
+        src='/fullscreen.png'
+        alt='fullscreen'
+        width={26}
+        height={26}
+        className={style.icon}
+      />
     </button>
   );
 };
