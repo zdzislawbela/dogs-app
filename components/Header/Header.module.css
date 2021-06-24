@@ -5,13 +5,13 @@
   align-items: center;
   background-color: rgb(255, 255, 255);
   padding: 0.2rem 0.2rem 0 0.2rem;
-  border-bottom: rgb(84, 84, 84) 1px solid;
+  border-bottom: rgb(240, 240, 240) 1px solid;
 }
 
 .headerButton {
   background: none;
   border: none;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   text-align: center;
   transition: all 0.2s;
 }
@@ -23,11 +23,7 @@
 }
 
 @media only screen and (max-width: 915px) {
-  .headerButton {
-    padding: 0.5rem 1rem;
-    text-align: center;
-  }
   .header {
-    box-shadow: 15px 15px 15px 15px rgb (209, 255, 163);
+    box-shadow: inset 0px -36px 71px -81px rgba(188, 188, 188, 0.671);
   }
 }

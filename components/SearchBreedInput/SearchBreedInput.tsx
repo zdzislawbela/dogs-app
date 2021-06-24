@@ -13,11 +13,16 @@ export const SearchBreedInput = ({ filterBreeds }: Props) => {
     filterBreeds(e.currentTarget.value);
   };
 
+  const handleDeleteText = () => {
+    setSearch("");
+    filterBreeds("");
+  };
+
   return (
     <div className={style.inputContainer}>
       <input
         className={style.input}
-        placeholder='Search'
+        placeholder='Select breed'
         type='text'
         value={search}
         onChange={(e) => handleOnChange(e)}
@@ -25,6 +30,16 @@ export const SearchBreedInput = ({ filterBreeds }: Props) => {
       <div className={style.loupeContainer}>
         <img className={style.loupe} src='/loupe.png' alt='Loupe' />
       </div>
+      <button
+        onClick={handleDeleteText}
+        className={style.deleteTextInputContainer}
+      >
+        <img
+          src='/delete-input-text.png'
+          alt='Delete'
+          className={style.deleteInputText}
+        />
+      </button>
     </div>
   );
 };

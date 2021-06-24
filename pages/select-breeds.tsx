@@ -58,7 +58,7 @@ export default function SelectBreeds() {
   };
 
   return (
-    <div className={styles.main}>
+    <div className={styles.mainSelectBreed}>
       <Head>
         <title>🐕 Select Breeds</title>
         <meta
@@ -69,7 +69,6 @@ export default function SelectBreeds() {
       </Head>
       <div className={styles.breeds}>
         <SearchBreedInput filterBreeds={filterBreeds} />
-        <p>Select breeds you'd like to fetch </p>
         <div className={styles.breed}>
           <BreedCheckbox
             handleCheckbox={handleSelectAll}
