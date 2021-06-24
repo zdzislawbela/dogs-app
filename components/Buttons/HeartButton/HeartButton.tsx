@@ -1,24 +1,31 @@
-import React, { useState } from "react";
-import { useAppContext } from "../../../context/";
+import React from "react";
+import { likedDogsDetails, useAppContext } from "../../../context";
 
 import style from "./HeartButton.module.css";
 
-export const HeartButton = ({ image, breed }) => {
+type HeartButton = {
+  image: string;
+  breed: string;
+};
+
+export const HeartButton = ({ image, breed }: HeartButton) => {
   const { likedDogs, setLikedDogs } = useAppContext();
 
   const images = likedDogs.map((dog) => dog.image);
   const isLiked = images.includes(image);
 
-  const handleLike = () => {
+  const handleLikeButton = () => {
     if (isLiked) {
       setLikedDogs(likedDogs.filter((dog) => dog.image !== image));
       return;
     }
-    setLikedDogs((likedDogs) => [...likedDogs, { image, breed }]);
+    const newLikedDog = { image, breed };
+    const newLikedDogs: likedDogsDetails = [...likedDogs, newLikedDog];
+    setLikedDogs(newLikedDogs);
   };
 
   return (
-    <button onClick={handleLike} className={style.heartButton}>
+    <button onClick={handleLikeButton} className={style.heartButton}>
       {isLiked && <div className={style.clickedHeartButton}></div>}
 
       <img

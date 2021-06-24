@@ -1,14 +1,19 @@
 import React from "react";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import { useAppContext } from "../../context";
+import { useAppContext } from "../../../context";
 
 import styles from "./RemoveFromLikeListButton.module.css";
 
-export const RemoveFromLikeListButton = ({ image }) => {
+type Props = {
+  image: string;
+};
+
+export const RemoveFromLikeListButton = ({ image }: Props) => {
   const { likedDogs, setLikedDogs } = useAppContext();
 
-  const removeFromLikeList = (e) => {
-    setLikedDogs(likedDogs.filter((dog) => dog.image !== image));
+  const removeFromLikeList = () => {
+    const filteredLikedDogs = likedDogs.filter((dog) => dog.image !== image);
+    setLikedDogs(filteredLikedDogs);
   };
 
   return (

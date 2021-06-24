@@ -1,0 +1,22 @@
+.minimizeButton {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.3rem;
+  z-index: 10;
+  transition: 0.3s all;
+  padding: 0.5rem;
+  background: none;
+}
+
+.img {
+  background: rgba(255, 255, 255, 0.83);
+}
+
+.minimizeButton:hover {
+  cursor: pointer;
+}

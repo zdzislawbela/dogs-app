@@ -1,0 +1,22 @@
+.fullScreenButton {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  bottom: 0;
+  left: 1rem;
+  font-size: 1.3rem;
+  z-index: 10;
+  transition: 0.3s all;
+  padding: 0.5rem;
+  background: none;
+}
+
+.icon {
+  background: rgba(255, 255, 255, 0.83);
+}
+
+.fullScreenButton:hover {
+  cursor: pointer;
+}

@@ -1,76 +1,94 @@
 import React, { createContext, useContext, useState, FC } from "react";
-import { dogBreeds } from "../data/dogbreeds";
-
-const initDogBreeds = dogBreeds.map((dog) => {
-  return { name: dog, checked: true };
-});
+import { Breed, breedsData } from "../data/breedsData";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export type DogDetails = {
-  message: string;
   status: string;
+  image: string;
+  breedName: Breed;
+  time: number;
+};
+
+export type DogsDetails = DogDetails[];
+
+export type likedDogsDetails = {
+  image: string;
+  breed: string;
 }[];
+
+export type modalDetails = { image: string; breed: string } | null;
 
 export interface AppSharedState {
   loading: boolean;
   setLoading: (loading: boolean) => void;
-  dogs: DogDetails[];
-  setDogs: (dogs: DogDetails[]) => void;
-  likedDogs: DogDetails[];
-  setLikedDogs: (dogs: DogDetails[]) => void;
-  breed: string;
-  setBreed: (breed: string) => void;
-  error: boolean;
-  setError: (error: boolean) => void;
+  isError: string | boolean;
+  setIsError: (isError: string | boolean) => void;
+  modalDetails: modalDetails;
+  setModalDetails: (modalDetails: modalDetails) => void;
+  fetchedDogs: DogsDetails;
+  setFetchedDogs: (fetchedDogs: DogsDetails) => void;
+  likedDogs: likedDogsDetails;
+  setLikedDogs: (likedDogs: likedDogsDetails) => void;
+
   apiCallCounter: number;
   setApiCallCounter: (apiCallCounter: number) => void;
+
   isSelectAll: boolean;
   setIsSelectAll: (isSelectAll: boolean) => void;
-  dogsAPI: string;
-  dogBreedsContainer: { name: string; checked: boolean }[];
-  setDogBreedsContainer: (
-    dogBreedsContainer: {
-      name: string;
-      checked: boolean;
-    }[]
-  ) => void;
-  breedsChanged: boolean;
-  setBreedsChanged: (changed: boolean) => void;
+
+  storagedBreeds: string[];
+  setStoragedBreeds: (breeds: string[]) => void;
 }
 
 const AppContext = createContext<AppSharedState>({} as AppSharedState);
 
 const AppSharedState = () => {
+  const [storagedBreeds, setStoragedBreeds] = useLocalStorage<string[]>(
+    "selectedBreeds",
+    breedsData
+  );
+
+  const [likedDogs, setLikedDogs] = useLocalStorage<likedDogsDetails>(
+    "likedDogs",
+    []
+  );
+
+  if (typeof window !== "undefined") {
+    const storagedBreedsExists = window.localStorage.getItem("selectedBreeds");
+    if (!storagedBreedsExists) {
+      setStoragedBreeds(breedsData);
+    }
+
+    const likedDogsExists = window.localStorage.getItem("likedDogs");
+    if (!likedDogsExists) {
+      setLikedDogs([]);
+    }
+  }
+
   const [loading, setLoading] = useState(true);
-  const [dogs, setDogs] = useState([] as DogDetails[]);
-  const [likedDogs, setLikedDogs] = useState([] as DogDetails[]);
-  const [breed, setBreed] = useState("");
-  const [error, setError] = useState(false);
+  const [isError, setIsError] = useState<string | boolean>(false);
+  const [modalDetails, setModalDetails] = useState<modalDetails>(null);
+  const [fetchedDogs, setFetchedDogs] = useState<DogsDetails>([]);
   const [apiCallCounter, setApiCallCounter] = useState(0);
   const [isSelectAll, setIsSelectAll] = useState(true);
-  const [dogBreedsContainer, setDogBreedsContainer] = useState(initDogBreeds);
-  const [breedsChanged, setBreedsChanged] = useState(false);
-  const dogsAPI = `https://dog.ceo/api/breed/${breed}/images/random`;
 
   return {
     loading,
     setLoading,
-    dogs,
-    setDogs,
+    isError,
+    setIsError,
+    modalDetails,
+    setModalDetails,
+    fetchedDogs,
+    setFetchedDogs,
     likedDogs,
     setLikedDogs,
-    breed,
-    setBreed,
-    error,
-    setError,
     apiCallCounter,
     setApiCallCounter,
     isSelectAll,
     setIsSelectAll,
-    dogBreedsContainer,
-    setDogBreedsContainer,
-    breedsChanged,
-    setBreedsChanged,
-    dogsAPI,
+    storagedBreeds,
+    setStoragedBreeds,
   };
 };
 
