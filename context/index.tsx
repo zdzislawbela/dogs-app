@@ -16,12 +16,15 @@ export type likedDogsDetails = {
   breed: string;
 }[];
 
+export type modalDetails = { image: string; breed: string } | null;
+
 export interface AppSharedState {
   loading: boolean;
   setLoading: (loading: boolean) => void;
   isError: string | boolean;
   setIsError: (isError: string | boolean) => void;
-
+  modalDetails: modalDetails;
+  setModalDetails: (modalDetails: modalDetails) => void;
   fetchedDogs: DogsDetails;
   setFetchedDogs: (fetchedDogs: DogsDetails) => void;
   likedDogs: likedDogsDetails;
@@ -64,6 +67,7 @@ const AppSharedState = () => {
 
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState<string | boolean>(false);
+  const [modalDetails, setModalDetails] = useState<modalDetails>(null);
   const [fetchedDogs, setFetchedDogs] = useState<DogsDetails>([]);
   const [apiCallCounter, setApiCallCounter] = useState(0);
   const [isSelectAll, setIsSelectAll] = useState(true);
@@ -73,6 +77,8 @@ const AppSharedState = () => {
     setLoading,
     isError,
     setIsError,
+    modalDetails,
+    setModalDetails,
     fetchedDogs,
     setFetchedDogs,
     likedDogs,

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 import { useAppContext } from "../../context";
+import { FullScreenButton } from "../Buttons/FullScreenButton/FullScreenButton";
 import { RemoveFromLikeListButton } from "../Buttons/RemoveFromLikeListButton/RemoveFromLikeListButton";
+import { LikedDogModal } from "../LikedDogModal/LikedDogModal";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
-import styles from "./LikedDogs.module.css";
+import style from "./LikedDogs.module.css";
 
 export const LikedDogs = () => {
-  const { likedDogs } = useAppContext();
+  const { likedDogs, modalDetails, setModalDetails } = useAppContext();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -19,23 +21,34 @@ export const LikedDogs = () => {
     return () => window.clearTimeout(timeoutID);
   }, []);
 
+  const handleModalOpening = (image: string, breed: string) => {
+    if (modalDetails) {
+      return setModalDetails(null);
+    }
+    setModalDetails({ image, breed });
+  };
+
   return (
     <>
+      {modalDetails && <LikedDogModal />}
       {loading && <LoadingSpinner />}
       {!loading &&
         likedDogs &&
         likedDogs.map((dog, index) => {
           return (
-            <div key={`${dog.image}${index}`} className={styles.dog}>
-              <div className={styles.imgContainer}>
-                <img className={styles.dogImg} src={dog.image} alt='dog' />
-              </div>
+            <div key={`${dog.image}${index}`} className={style.likedDog}>
+              <img className={style.likedDogImage} src={dog.image} alt='dog' />
 
-              <div className={styles.dogImgTitle}>
-                <div className={styles.title}>
+              <div className={style.likedDogTitle}>
+                <div className={style.title}>
                   <p>{dog.breed}</p>
+                  <FullScreenButton
+                    image={dog.image}
+                    breed={dog.breed}
+                    handleModalOpening={handleModalOpening}
+                  />
+                  <RemoveFromLikeListButton image={dog.image} />
                 </div>
-                <RemoveFromLikeListButton image={dog.image} />
               </div>
             </div>
           );
