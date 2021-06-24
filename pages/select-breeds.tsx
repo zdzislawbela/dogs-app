@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import { Breed, breedsData } from "../data/breedsData";
 import { useAppContext } from "../context";
 
@@ -16,6 +16,7 @@ export default function SelectBreeds() {
     storagedBreeds,
     setStoragedBreeds,
   } = useAppContext();
+  const [keyword, setKeyword] = useState("");
 
   const handleSelectAll = () => {
     setFetchedDogs([]);
@@ -52,6 +53,9 @@ export default function SelectBreeds() {
       includeToStorage(option);
     }
   };
+  const filterBreeds = (userInput: string) => {
+    setKeyword(userInput);
+  };
 
   return (
     <div className={styles.main}>
@@ -64,7 +68,7 @@ export default function SelectBreeds() {
         <link rel='icon' href='/favicon.png' />
       </Head>
       <div className={styles.breeds}>
-        <SearchBreedInput />
+        <SearchBreedInput filterBreeds={filterBreeds} />
         <p>Select breeds you'd like to fetch </p>
         <div className={styles.breed}>
           <BreedCheckbox
@@ -73,19 +77,21 @@ export default function SelectBreeds() {
             isChecked={isSelectAll}
           />
         </div>
-        {breedsData.map((breed) => {
-          const isBreedSelected = storagedBreeds.includes(breed);
+        {breedsData
+          .filter((breed) => breed.includes(keyword))
+          .map((breed) => {
+            const isBreedSelected = storagedBreeds.includes(breed);
 
-          return (
-            <div key={breed} className={styles.breed}>
-              <BreedCheckbox
-                handleCheckbox={handleBreedCheckbox}
-                breed={breed}
-                isChecked={isBreedSelected}
-              />
-            </div>
-          );
-        })}
+            return (
+              <div key={breed} className={styles.breed}>
+                <BreedCheckbox
+                  handleCheckbox={handleBreedCheckbox}
+                  breed={breed}
+                  isChecked={isBreedSelected}
+                />
+              </div>
+            );
+          })}
       </div>
     </div>
   );
