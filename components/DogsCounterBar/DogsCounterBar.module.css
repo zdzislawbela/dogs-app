@@ -48,3 +48,15 @@
     margin: 0.3rem;
   }
 }
+
+@media only screen and (max-width: 450px) {
+  .counterSideBar {
+    height: 2rem;
+    top: 93.5%;
+  }
+
+  .containerSideBar > p {
+    padding: 0;
+    margin: 0;
+  }
+}

@@ -9,19 +9,25 @@ export const Header = () => {
     <div className={style.header}>
       <Link href='/'>
         <button className={style.headerButton}>
-          <a> Home 🏠</a>
+          <a className={style.mobile}> Home </a>🏠
+        </button>
+      </Link>
+      |
+      <Link href='/select-breeds'>
+        <button className={style.headerButton}>
+          <a className={style.mobile}> Select </a>🔎
         </button>
       </Link>
       |
       <Link href='/fetch'>
         <button className={style.headerButton}>
-          <a> Fetch 🐕</a>
+          <a className={style.mobile}> Fetch</a>🐕
         </button>
       </Link>
       |
       <Link href='/liked'>
         <button className={style.headerButton}>
-          <a> Liked ❤️</a>
+          <a className={style.mobile}> Liked </a>❤️
         </button>
       </Link>
       |

@@ -5,21 +5,15 @@ import style from "./DogsCounterBar.module.css";
 
 export const DogsCounterBar = () => {
   const { fetchedDogs, likedDogs } = useAppContext();
-  const [fetchedDogTitle, setFetchedDogTitle] = useState("");
-  const [likedDogsTitle, setLikedDogsTitle] = useState("");
 
-  useEffect(() => {
-    const numberOfFetchedDogs = fetchedDogs.length;
-    const numberOfLikedDogs = likedDogs.length;
-
-    setFetchedDogTitle(`🐕 ${numberOfFetchedDogs}`);
-    setLikedDogsTitle(`❤️ ${numberOfLikedDogs}`);
-  }, [fetchedDogs, likedDogs]);
+  const numberOfFetchedDogs = fetchedDogs.length;
+  const numberOfLikedDogs = likedDogs.length;
 
   return (
     <div className={style.counterSideBar}>
       <div className={style.containerSideBar}>
-        <p>{fetchedDogTitle}</p> <p>{likedDogsTitle}</p>
+        <p>🐕 {numberOfFetchedDogs}</p>
+        <p>❤️ {numberOfLikedDogs}</p>
       </div>
     </div>
   );
