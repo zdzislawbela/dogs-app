@@ -17,9 +17,8 @@ export const RemoveFromLikeListButton = ({ image }: Props) => {
   };
 
   return (
-    <HighlightOffIcon
-      onClick={removeFromLikeList}
-      className={styles.closingIcon}
-    />
+    <button className={styles.closingIcon} onClick={removeFromLikeList}>
+      <HighlightOffIcon />
+    </button>
   );
 };

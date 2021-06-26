@@ -28,6 +28,17 @@ export const HeartButton = ({ image, breed }: HeartButton) => {
     <button onClick={handleLikeButton} className={style.heartButton}>
       {isLiked && <div className={style.clickedHeartButton}></div>}
 
+      {isLiked && (
+        <div className={style.clickedHeartGoTop}>
+          <img
+            src='/likedHeart.png'
+            alt='Picture of heart'
+            width={28}
+            height={28}
+          />
+        </div>
+      )}
+
       <img
         src={isLiked ? "/likedHeart.png" : "/heart.png"}
         alt='Picture of heart'

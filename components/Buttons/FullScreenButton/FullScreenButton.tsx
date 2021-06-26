@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./FullScreenButton.module.css";
+import style from "./FullScreenButton.module.scss";
 
 type Props = {
   image: string;

@@ -13,7 +13,12 @@ export const LikedDogModal = () => {
   };
 
   return (
-    <div className={style.fullscreenModal}>
+    <div className={style.fullScreenModal}>
+      <button
+        className={style.buttonOnFullScreen}
+        onClick={handleCloseModal}
+      ></button>
+
       <div className={style.likedDogModal}>
         <MinimizeButton handleCloseModal={handleCloseModal} />
         <img

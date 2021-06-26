@@ -11,12 +11,19 @@
   transition: 0.3s all;
   padding: 0.5rem;
   background: none;
+
+  :hover {
+    cursor: pointer;
+  }
+
+  .img {
+    background: rgba(255, 255, 255, 0.83);
+  }
 }
 
-.img {
-  background: rgba(255, 255, 255, 0.83);
-}
-
-.minimizeButton:hover {
-  cursor: pointer;
+@media only screen and (max-width: 450px) {
+  .minimizeButton {
+    top: 0;
+    right: 0;
+  }
 }
