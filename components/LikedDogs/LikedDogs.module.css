@@ -2,7 +2,6 @@
   position: relative;
   width: 35vw;
   max-width: 400px;
-
   transition: 0.3s all;
 }
 
@@ -12,6 +11,17 @@
   height: 400px;
   object-fit: cover;
   box-sizing: border-box;
+}
+
+.buttonOnImage {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 90%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
 }
 
 .likedDogTitle {
@@ -35,6 +45,7 @@
   text-align: center;
   padding: 0;
 }
+
 .title > p {
   text-align: center;
   margin: 0.5rem;

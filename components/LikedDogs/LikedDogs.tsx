@@ -34,20 +34,24 @@ export const LikedDogs = () => {
       {loading && <LoadingSpinner />}
       {!loading &&
         likedDogs &&
-        likedDogs.map((dog, index) => {
+        likedDogs.map(({ image, breed }, index) => {
           return (
-            <div key={`${dog.image}${index}`} className={style.likedDog}>
-              <img className={style.likedDogImage} src={dog.image} alt='dog' />
+            <div key={`${image}${index}`} className={style.likedDog}>
+              <button
+                className={style.buttonOnImage}
+                onClick={() => handleModalOpening(image, breed)}
+              ></button>
+              <img className={style.likedDogImage} src={image} alt='dog' />
 
               <div className={style.likedDogTitle}>
                 <div className={style.title}>
-                  <p>{dog.breed}</p>
+                  <p>{breed}</p>
                   <FullScreenButton
-                    image={dog.image}
-                    breed={dog.breed}
+                    image={image}
+                    breed={breed}
                     handleModalOpening={handleModalOpening}
                   />
-                  <RemoveFromLikeListButton image={dog.image} />
+                  <RemoveFromLikeListButton image={image} />
                 </div>
               </div>
             </div>
