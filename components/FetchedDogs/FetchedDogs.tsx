@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
-import { DogDetails, DogsDetails, useAppContext } from "../../context";
+import {
+  DogDetails,
+  DogsDetails,
+  likedDogsDetails,
+  useAppContext,
+} from "../../context";
 
 import { HeartButton } from "../Buttons/HeartButton/HeartButton";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
-import styles from "./FetchedDogs.module.css";
+import style from "./FetchedDogs.module.css";
 import { Breed } from "../../data/breedsData";
 
 type fetchedDog = {
@@ -20,6 +25,8 @@ export const FetchedDogs = () => {
     setLoading,
     fetchedDogs,
     setFetchedDogs,
+    likedDogs,
+    setLikedDogs,
     setIsError,
     apiCallCounter,
     setApiCallCounter,
@@ -109,38 +116,63 @@ export const FetchedDogs = () => {
     return () => window.clearTimeout(timeoutID);
   }, [breed]);
 
+  const handleDoubleClick = (image: string, breed: string) => {
+    clearTimeout(0);
+
+    const images = likedDogs.map((dog) => dog.image);
+    const isLiked = images.includes(image);
+
+    if (isLiked) {
+      setLikedDogs(likedDogs.filter((dog) => dog.image !== image));
+      return;
+    }
+
+    const newLikedDog = { image, breed };
+    const newLikedDogs: likedDogsDetails = [...likedDogs, newLikedDog];
+    setLikedDogs(newLikedDogs);
+
+    setTimeout(() => {
+      return;
+    }, 200);
+  };
+
   return (
-    <div className={styles.dogsContainer}>
-      <div className={styles.container}>
+    <div className={style.dogsContainer}>
+      <div className={style.container}>
         {fetchedDogs &&
-          fetchedDogs.map((dog, index) => {
+          fetchedDogs.map(({ image, breedName, time }, index) => {
             const isLast = fetchedDogs.length === index + 1;
             return (
               <div
-                className={styles.dog}
-                key={`${dog.time}|${dog.image}`}
+                className={style.dog}
+                key={`${time} | ${image}`}
                 ref={isLast ? useIntersectionObserver : undefined}
               >
-                <img className={styles.dogImg} src={dog.image} alt='dog' />
+                <button
+                  className={style.coverFetchedDogImage}
+                  onDoubleClick={() => handleDoubleClick(image, breedName)}
+                ></button>
 
-                <div className={styles.dogCaption}>
-                  <HeartButton image={dog.image} breed={dog.breedName} />
-                  <p className={styles.dogtitle}>{dog.breedName}</p>
+                <img className={style.dogImg} src={image} alt='dog' />
+
+                <div className={style.dogCaption}>
+                  <HeartButton image={image} breed={breedName} />
+                  <p className={style.dogtitle}>{breedName}</p>
                 </div>
               </div>
             );
           })}
 
-        <div className={styles.dog}>
-          <div className={styles.dogImg}>
+        <div className={style.dog}>
+          <div className={style.dogImg}>
             <img
-              className={styles.dogImg}
+              className={style.dogImg}
               src='/loading-dog.jpg'
               alt='loading img placeholder'
             />
             <LoadingSpinner />
           </div>
-          <div className={styles.titleContainer}></div>
+          <div className={style.titleContainer}></div>
         </div>
       </div>
     </div>
