@@ -13,7 +13,7 @@
   overflow: hidden;
   overflow-y: hidden;
   overflow-x: hidden;
-  animation-name: example;
+  animation-name: slideFromLeft;
   animation-duration: 0.5s;
 }
 
@@ -27,7 +27,7 @@
   cursor: pointer;
 }
 
-@keyframes example {
+@keyframes slideFromLeft {
   0% {
     left: -100%;
     top: 0;
@@ -37,6 +37,7 @@
     top: 0;
   }
 }
+
 .likedDogModal {
   position: relative;
   transition: 0.3s all;
