@@ -1,4 +1,4 @@
-.fullscreenModal {
+.fullScreenModal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,6 +15,16 @@
   overflow-x: hidden;
   animation-name: example;
   animation-duration: 0.5s;
+}
+
+.buttonOnFullScreen {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 90%;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 @keyframes example {

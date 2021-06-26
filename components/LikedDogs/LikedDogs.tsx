@@ -6,7 +6,7 @@ import { RemoveFromLikeListButton } from "../Buttons/RemoveFromLikeListButton/Re
 import { LikedDogModal } from "../LikedDogModal/LikedDogModal";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
-import style from "./LikedDogs.module.css";
+import style from "./LikedDogs.module.scss";
 
 export const LikedDogs = () => {
   const { likedDogs, modalDetails, setModalDetails } = useAppContext();

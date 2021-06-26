@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./MinimizeButton.module.css";
+import style from "./MinimizeButton.module.scss";
 
 type Props = {
   handleCloseModal: () => void;

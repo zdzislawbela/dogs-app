@@ -117,16 +117,15 @@ export const FetchedDogs = () => {
             const isLast = fetchedDogs.length === index + 1;
             return (
               <div
-                key={`${dog.time}|${dog.image}`}
                 className={styles.dog}
+                key={`${dog.time}|${dog.image}`}
                 ref={isLast ? useIntersectionObserver : undefined}
               >
                 <img className={styles.dogImg} src={dog.image} alt='dog' />
 
-                <div className={styles.titleContainer}>
+                <div className={styles.dogCaption}>
                   <HeartButton image={dog.image} breed={dog.breedName} />
-
-                  <p className={styles.title}>{dog.breedName}</p>
+                  <p className={styles.dogtitle}>{dog.breedName}</p>
                 </div>
               </div>
             );
