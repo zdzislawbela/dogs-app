@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+
+import { useAppContext } from "../../context";
 
 import { KebabIcon } from "./KebabIcon";
 
 import style from "./KebabMenu.module.css";
 
 export const KebabMenu = () => {
+  const { isMosaic, setIsMosaic } = useAppContext();
+
   const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -27,10 +32,21 @@ export const KebabMenu = () => {
     router.push(routerPath);
   };
 
-  const options = [
-    { name: "Select breeds", path: "/select-breeds" },
-    { name: "About", path: "/about" },
-  ];
+  const toggleMosaic = () => {
+    const innerWidth = window.innerWidth;
+    if (isMosaic) {
+      handleClose();
+      return setIsMosaic(!isMosaic);
+    }
+
+    if (innerWidth > 451) {
+      handleClose();
+      return alert("Only for screens width below 450 px. Sorry. ");
+    }
+
+    setIsMosaic(!isMosaic);
+    handleClose();
+  };
 
   const ITEM_HEIGHT = 48;
 
@@ -62,11 +78,16 @@ export const KebabMenu = () => {
       >
         <div className={style.kebabOptionsContainer}>
           <div className={style.kebabOptions}>
-            {options.map((option) => (
-              <MenuItem key={option.name} onClick={() => openPage(option.path)}>
-                {option.name}
+            {router.pathname === "/fetch" ? (
+              <MenuItem key='Mosaic' onClick={() => toggleMosaic()}>
+                {isMosaic ? "Turn off mosaic" : "Switch to mosaic"}
               </MenuItem>
-            ))}
+            ) : (
+              ""
+            )}
+            <MenuItem key='About' onClick={() => openPage("/about")}>
+              About
+            </MenuItem>
           </div>
         </div>
       </Menu>

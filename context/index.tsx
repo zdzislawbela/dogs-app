@@ -19,6 +19,8 @@ export type likedDogsDetails = {
 export type modalDetails = { image: string; breed: string } | null;
 
 export interface AppSharedState {
+  isMosaic: boolean;
+  setIsMosaic: (isMosaic: boolean) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
   isError: string | boolean;
@@ -64,7 +66,7 @@ const AppSharedState = () => {
       setLikedDogs([]);
     }
   }
-
+  const [isMosaic, setIsMosaic] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState<string | boolean>(false);
   const [modalDetails, setModalDetails] = useState<modalDetails>(null);
@@ -73,6 +75,8 @@ const AppSharedState = () => {
   const [isSelectAll, setIsSelectAll] = useState(true);
 
   return {
+    isMosaic,
+    setIsMosaic,
     loading,
     setLoading,
     isError,

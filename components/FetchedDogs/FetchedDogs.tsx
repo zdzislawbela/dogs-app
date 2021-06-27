@@ -12,6 +12,7 @@ import Link from "next/link";
 
 export const FetchedDogs = () => {
   const {
+    isMosaic,
     loading,
     setLoading,
     fetchedDogs,
@@ -40,9 +41,10 @@ export const FetchedDogs = () => {
   };
 
   const waitForAll = () => {
+    const miliSeconds = isMosaic ? 6000 : 2500;
     setTimeout(() => {
       setIsScreenFilled(true);
-    }, 2500);
+    }, miliSeconds);
   };
   waitForAll();
 
@@ -102,14 +104,22 @@ export const FetchedDogs = () => {
   };
 
   return (
-    <div className={style.dogsContainer}>
+    <div
+      className={
+        isMosaic
+          ? `${style.dogsContainer} ${style.mosaicDogsContainer}`
+          : `${style.dogsContainer}`
+      }
+    >
       {storagedBreeds.length !== 0 &&
         fetchedDogs &&
         fetchedDogs.map(({ image, breedName, time }, index) => {
           return (
             <div
+              className={
+                isMosaic ? `${style.dog} ${style.mosaicDog}` : `${style.dog}`
+              }
               ref={useIntersectionObserver}
-              className={style.dog}
               key={`${time} | ${image}`}
             >
               <button
@@ -117,9 +127,23 @@ export const FetchedDogs = () => {
                 onDoubleClick={() => handleDoubleClick(image, breedName)}
               ></button>
 
-              <img className={style.dogImg} src={image} alt='dog' />
+              <img
+                className={
+                  isMosaic
+                    ? `${style.dogImg} ${style.mosaicDogImg}`
+                    : `${style.dogImg}`
+                }
+                src={image}
+                alt='dog'
+              />
 
-              <div className={style.dogCaption}>
+              <div
+                className={
+                  isMosaic
+                    ? `${style.dogCaption} ${style.displayNone}`
+                    : `${style.dogCaption}`
+                }
+              >
                 <HeartButton image={image} breed={breedName} />
                 <p className={style.dogtitle}>{breedName}</p>
               </div>
