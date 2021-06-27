@@ -24,7 +24,7 @@ export const FetchedDogs = () => {
 
   const [breed, setBreed] = useState<Breed>();
   const [random, setRandom] = useState(0);
-
+  const [isScreenFilled, setIsScreenFilled] = useState(false);
   const observer = useRef<null | IntersectionObserver>(null);
 
   const getNextDog = () => {
@@ -39,9 +39,17 @@ export const FetchedDogs = () => {
     return storagedBreeds[random];
   };
 
+  const waitForAll = () => {
+    setTimeout(() => {
+      setIsScreenFilled(true);
+    }, 2500);
+  };
+  waitForAll();
+
   const useIntersectionObserver = useCallback(
     (node) => {
       if (loading) return;
+
       if (observer.current) {
         observer.current.disconnect();
       }
@@ -95,68 +103,70 @@ export const FetchedDogs = () => {
 
   return (
     <div className={style.dogsContainer}>
-      <div className={style.container}>
-        {storagedBreeds.length !== 0 &&
-          fetchedDogs &&
-          fetchedDogs.map(({ image, breedName, time }, index) => {
-            return (
-              <div
-                ref={useIntersectionObserver}
-                className={style.dog}
-                key={`${time} | ${image}`}
-              >
-                <button
-                  className={style.coverFetchedDogImage}
-                  onDoubleClick={() => handleDoubleClick(image, breedName)}
-                ></button>
+      {storagedBreeds.length !== 0 &&
+        fetchedDogs &&
+        fetchedDogs.map(({ image, breedName, time }, index) => {
+          return (
+            <div
+              ref={useIntersectionObserver}
+              className={style.dog}
+              key={`${time} | ${image}`}
+            >
+              <button
+                className={style.coverFetchedDogImage}
+                onDoubleClick={() => handleDoubleClick(image, breedName)}
+              ></button>
 
-                <img className={style.dogImg} src={image} alt='dog' />
+              <img className={style.dogImg} src={image} alt='dog' />
 
-                <div className={style.dogCaption}>
-                  <HeartButton image={image} breed={breedName} />
-                  <p className={style.dogtitle}>{breedName}</p>
-                </div>
-              </div>
-            );
-          })}
-
-        {storagedBreeds.length === 0 ? (
-          <div className={style.noBreedsInfo}>
-            <div className={style.dog}>
-              <img
-                className={style.dogImg}
-                src='/loading-dog.jpg'
-                alt='loading img placeholder'
-              />
-              <div className={style.contentCenter}>
-                <div>You didn't select any breed.</div>
-                <div>Go to:</div>
-                <div>
-                  <Link href='/select-breeds'>
-                    <button className={style.headerButton}>
-                      <a> Select 🔎</a>
-                    </button>
-                  </Link>
-                </div>
+              <div className={style.dogCaption}>
+                <HeartButton image={image} breed={breedName} />
+                <p className={style.dogtitle}>{breedName}</p>
               </div>
             </div>
-          </div>
-        ) : (
+          );
+        })}
+
+      {storagedBreeds.length === 0 ? (
+        <div className={style.noBreedsInfo}>
           <div className={style.dog}>
-            <div className={style.dogImg}>
-              <img
-                className={style.dogImg}
-                src='/loading-dog.jpg'
-                alt='loading img placeholder'
-              />
-              <LoadingSpinner />
-            </div>
-            <div className={style.dogCaption}>
-              <p className={style.dogtitle}>LOADING</p>
+            <img
+              className={style.dogImg}
+              src='/loading-dog.jpg'
+              alt='loading img placeholder'
+            />
+            <div className={style.contentCenter}>
+              <div>You didn't select any breed.</div>
+              <div>Go to:</div>
+              <div>
+                <Link href='/select-breeds'>
+                  <button className={style.headerButton}>
+                    <a> Select 🔎</a>
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div
+          className={
+            isScreenFilled ? `${style.dog}` : `${style.fullscreenCoverLoading}`
+          }
+        >
+          <div className={style.dogImgCover}>
+            <img
+              className={style.dogImg}
+              src='/loading-dog.jpg'
+              alt='loading img placeholder'
+            />
+            <LoadingSpinner />
+          </div>
+          <div className={style.dogCaption}>
+            <p className={style.dogtitle}>LOADING</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
