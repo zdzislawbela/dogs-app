@@ -149,10 +149,37 @@
     align-items: center;
   }
 
-  .dogImg {
+  .mosaicDogsContainer {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
-  .mobile {
+  .dog {
+    width: 100%;
+    min-width: 300px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mosaicDog {
+    width: 33.3vw;
+    max-width: 145px;
+    min-width: 20px;
+    height: 16vh;
+  }
+
+  .dogImg {
+    object-fit: cover;
+  }
+
+  .mosaicDogImg {
+    height: 100%;
+    object-fit: cover;
+  }
+  .displayNone {
     display: none;
   }
 }
