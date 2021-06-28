@@ -10,7 +10,7 @@ import styles from "../styles/Page.module.css";
 
 export default function SelectBreeds() {
   const {
-    setFetchedDogs,
+    loadMore,
     isSelectAll,
     setIsSelectAll,
     storagedBreeds,
@@ -19,8 +19,6 @@ export default function SelectBreeds() {
   const [keyword, setKeyword] = useState("");
 
   const handleSelectAll = () => {
-    setFetchedDogs([]);
-
     setIsSelectAll(!isSelectAll);
 
     if (!isSelectAll) {
@@ -29,11 +27,10 @@ export default function SelectBreeds() {
     if (isSelectAll) {
       setStoragedBreeds([]);
     }
+    loadMore(0, true);
   };
 
   const handleBreedCheckbox = (option: Breed) => {
-    setFetchedDogs([]);
-
     const excludeFromStorage = (option: Breed) => {
       const filteredBreeds = storagedBreeds.filter((breed) => breed !== option);
       setStoragedBreeds(filteredBreeds);
@@ -52,7 +49,9 @@ export default function SelectBreeds() {
     if (!isBreedSelected) {
       includeToStorage(option);
     }
+    loadMore(0, true);
   };
+
   const filterBreeds = (userInput: string) => {
     setKeyword(userInput);
   };

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useFetchDog } from "../../hooks/useFetchDog";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 
 import { likedDogsDetails, useAppContext } from "../../context";
 
@@ -7,38 +6,22 @@ import { HeartButton } from "../Buttons/HeartButton/HeartButton";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 
 import style from "./FetchedDogs.module.css";
-import { Breed } from "../../data/breedsData";
 import Link from "next/link";
 
 export const FetchedDogs = () => {
   const {
-    isMosaic,
     loading,
-    setLoading,
-    fetchedDogs,
-    setFetchedDogs,
+    error,
+    dogs,
+    loadMore,
+    isMosaic,
     likedDogs,
     setLikedDogs,
-    setIsError,
     storagedBreeds,
   } = useAppContext();
 
-  const [breed, setBreed] = useState<Breed>();
-  const [random, setRandom] = useState(0);
   const [isScreenFilled, setIsScreenFilled] = useState(false);
   const observer = useRef<null | IntersectionObserver>(null);
-
-  const getNextDog = () => {
-    setRandom(Math.floor(Math.random() * storagedBreeds.length));
-
-    if (random === 0 || random === 1) {
-      setRandom(-1);
-    }
-
-    setBreed(storagedBreeds[random]);
-
-    return storagedBreeds[random];
-  };
 
   const waitForAll = () => {
     const miliSeconds = isMosaic ? 6000 : 2500;
@@ -57,31 +40,13 @@ export const FetchedDogs = () => {
       }
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          getNextDog();
+          loadMore();
         }
       });
       if (node) observer.current.observe(node);
     },
     [loading]
   );
-
-  const fetchDog = () => {
-    setLoading(true);
-    useFetchDog(storagedBreeds[random]).then((newDog) => {
-      setFetchedDogs([...fetchedDogs, newDog]);
-      setLoading(false);
-      observer.current;
-    });
-  };
-
-  useEffect(() => {
-    getNextDog();
-    fetchDog();
-  }, []);
-
-  useEffect(() => {
-    fetchDog();
-  }, [breed]);
 
   const handleDoubleClick = (image: string, breed: string) => {
     clearTimeout(0);
@@ -103,6 +68,10 @@ export const FetchedDogs = () => {
     }, 200);
   };
 
+  useEffect(() => {
+    loadMore();
+  }, []);
+
   return (
     <div
       className={
@@ -112,8 +81,8 @@ export const FetchedDogs = () => {
       }
     >
       {storagedBreeds.length !== 0 &&
-        fetchedDogs &&
-        fetchedDogs.map(({ image, breedName, time }, index) => {
+        dogs &&
+        dogs.map(({ image, breedName, time }, index) => {
           return (
             <div
               className={

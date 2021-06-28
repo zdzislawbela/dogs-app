@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { useAppContext } from "../../context";
+
 import style from "./DogsCounterBar.module.scss";
 
 export const DogsCounterBar = () => {
-  const { fetchedDogs, likedDogs } = useAppContext();
+  const { dogs, likedDogs } = useAppContext();
 
-  const numberOfFetchedDogs = fetchedDogs.length;
+  const numberOfFetchedDogs = dogs.length;
   const numberOfLikedDogs = likedDogs.length;
 
   return (

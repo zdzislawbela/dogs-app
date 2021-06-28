@@ -13,7 +13,7 @@ type UseDogs = {
   dogs: DogDetails[];
   loading: boolean;
   error?: Error;
-  loadMore: () => Promise<void>;
+  loadMore: (howMany?: number, setEmpty?: boolean) => Promise<void>;
 };
 
 export const useDogs = (initalHowMany = 10): UseDogs => {
@@ -26,7 +26,11 @@ export const useDogs = (initalHowMany = 10): UseDogs => {
     breedsData
   );
 
-  const loadMore = async (howMany = 4) => {
+  const loadMore = async (howMany = 4, setEmpty = false) => {
+    if (setEmpty) {
+      return setDogs([]);
+    }
+
     setLoading(true);
 
     const getDog = async () => {
