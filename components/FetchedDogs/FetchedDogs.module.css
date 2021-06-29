@@ -157,11 +157,13 @@
     justify-content: flex-start;
     align-items: flex-start;
   }
+
   .dog {
     width: 100%;
     min-width: 300px;
     padding: 0;
     margin: 0;
+    border: 1px rgba(230, 230, 230, 0.582) solid;
   }
 
   .mosaicDog {
