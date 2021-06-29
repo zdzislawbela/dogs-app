@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAppContext } from "../context";
 
 type UseBreeds = {
   breeds: string[];
@@ -21,7 +22,7 @@ export const useBreeds = (): UseBreeds => {
     setLoadingBreeds(true);
 
     const getBreeds = async () => {
-      const addressToFetchAllBreeds = `${process.env.NEXT_PUBLIC_DOG_API_ALL_BREEDS}`;
+      const addressToFetchAllBreeds = `${process.env.NEXT_PUBLIC_DOG_API}breeds/list/all`;
       const response = await fetch(addressToFetchAllBreeds);
 
       if (response.status !== 200) {
@@ -49,8 +50,7 @@ export const useBreeds = (): UseBreeds => {
     };
 
     try {
-      const promise = getBreeds();
-      const breeds = await Promise.resolve(promise);
+      const breeds = await getBreeds();
       setBreeds(breeds);
     } catch (error) {
       console.error(error);

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { DogDetails } from "../context";
-import { breedsData } from "../data/breedsData";
+import { DogDetails, useAppContext } from "../context";
 import { useLocalStorage } from "./useLocalStorage";
 import { getRandomArrayIndex } from "../utils/getRandomArrayIndex";
 
@@ -18,14 +17,12 @@ type UseDogs = {
 };
 
 export const useDogs = (initalHowMany = 10): UseDogs => {
+  const { breeds } = useAppContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error>();
   const [dogs, setDogs] = useState<DogDetails[]>([]);
 
-  const [storagedBreeds] = useLocalStorage<string[]>(
-    "selectedBreeds",
-    breedsData
-  );
+  const [storagedBreeds] = useLocalStorage<string[]>("selectedBreeds", breeds);
 
   const loadMore = async (howMany = 4) => {
     setLoading(true);
@@ -33,7 +30,7 @@ export const useDogs = (initalHowMany = 10): UseDogs => {
     const getDog = async () => {
       const randomIndex = getRandomArrayIndex(storagedBreeds);
       const breedName = storagedBreeds[randomIndex];
-      const addressToFetch = `${process.env.NEXT_PUBLIC_DOG_API}${breedName}/images/random`;
+      const addressToFetch = `${process.env.NEXT_PUBLIC_DOG_API}breed/${breedName}/images/random`;
 
       const response = await fetch(addressToFetch);
 

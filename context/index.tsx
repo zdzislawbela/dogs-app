@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, FC } from "react";
-import { Breed, breedsData } from "../data/breedsData";
 import { useBreeds } from "../hooks/useBreeds";
 import { useDogs } from "../hooks/useDogs";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -7,7 +6,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 export type DogDetails = {
   status: string;
   image: string;
-  breedName: Breed;
+  breedName: string;
   downloadedAt: number;
 };
 
@@ -51,25 +50,27 @@ export interface AppSharedState {
 const AppContext = createContext<AppSharedState>({} as AppSharedState);
 
 const AppSharedState = () => {
-  const [storagedBreeds, setStoragedBreeds] = useLocalStorage<string[]>(
-    "selectedBreeds",
-    breedsData
-  );
-  const [likedDogs, setLikedDogs] = useLocalStorage<likedDogsDetails>(
-    "likedDogs",
-    []
-  );
+  const { loadingBreeds, errorBreeds, loadBreeds, breeds } = useBreeds();
   const [isMosaic, setIsMosaic] = useState(false);
   const [modalDetails, setModalDetails] = useState<modalDetails>(null);
   const [isSelectAll, setIsSelectAll] = useState(true);
 
-  const { loadingBreeds, errorBreeds, loadBreeds, breeds } = useBreeds();
+  const [storagedBreeds, setStoragedBreeds] = useLocalStorage<string[]>(
+    "selectedBreeds",
+    breeds
+  );
+
+  const [likedDogs, setLikedDogs] = useLocalStorage<likedDogsDetails>(
+    "likedDogs",
+    []
+  );
+
   const { loading, error, dogs, loadMore, setEmpty } = useDogs();
 
   if (typeof window !== "undefined") {
     const storagedBreedsExists = window.localStorage.getItem("selectedBreeds");
     if (!storagedBreedsExists) {
-      setStoragedBreeds(breedsData);
+      setStoragedBreeds(breeds);
     }
 
     const likedDogsExists = window.localStorage.getItem("likedDogs");
