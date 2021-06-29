@@ -16,6 +16,11 @@ type UseDogs = {
   setEmpty: () => void;
 };
 
+interface PromiseFulfilledResult<T> {
+  status: "fulfilled";
+  value: T;
+}
+
 export const useDogs = (initalHowMany = 10): UseDogs => {
   const { breeds } = useAppContext();
   const [loading, setLoading] = useState(false);
@@ -57,8 +62,7 @@ export const useDogs = (initalHowMany = 10): UseDogs => {
       const fulfilledNewDogDetails = newDogDetails
         .filter((promise) => promise.status === "fulfilled")
         .map((fulfilledPromise) => {
-          //@ts-ignore
-          return fulfilledPromise.value as DogDetails;
+          return (fulfilledPromise as PromiseFulfilledResult<DogDetails>).value;
         });
 
       setDogs((currentDogs) => [...currentDogs, ...fulfilledNewDogDetails]);
