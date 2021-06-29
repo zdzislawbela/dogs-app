@@ -18,6 +18,7 @@ export const FetchedDogs = () => {
     likedDogs,
     setLikedDogs,
     storagedBreeds,
+    loadBreeds,
   } = useAppContext();
 
   const [isScreenFilled, setIsScreenFilled] = useState(false);
@@ -76,6 +77,7 @@ export const FetchedDogs = () => {
 
   useEffect(() => {
     loadMore();
+    loadBreeds();
   }, []);
 
   return (

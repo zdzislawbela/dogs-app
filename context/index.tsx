@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, FC } from "react";
 import { Breed, breedsData } from "../data/breedsData";
+import { useBreeds } from "../hooks/useBreeds";
 import { useDogs } from "../hooks/useDogs";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -35,6 +36,11 @@ export interface AppSharedState {
   isSelectAll: boolean;
   setIsSelectAll: (isSelectAll: boolean) => void;
 
+  breeds: string[];
+  loadingBreeds: boolean;
+  errorBreeds?: Error;
+  loadBreeds: () => Promise<void>;
+
   dogs: DogDetails[];
   loading: boolean;
   error?: Error;
@@ -57,6 +63,7 @@ const AppSharedState = () => {
   const [modalDetails, setModalDetails] = useState<modalDetails>(null);
   const [isSelectAll, setIsSelectAll] = useState(true);
 
+  const { loadingBreeds, errorBreeds, loadBreeds, breeds } = useBreeds();
   const { loading, error, dogs, loadMore, setEmpty } = useDogs();
 
   if (typeof window !== "undefined") {
@@ -86,6 +93,11 @@ const AppSharedState = () => {
 
     isSelectAll,
     setIsSelectAll,
+
+    loadingBreeds,
+    errorBreeds,
+    loadBreeds,
+    breeds,
 
     loading,
     error,
