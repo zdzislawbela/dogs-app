@@ -10,10 +10,11 @@ type FetchedDog = {
 };
 
 type UseDogs = {
-  dogs: DogDetails[];
   loading: boolean;
   error?: Error;
-  loadMore: (howMany?: number, setEmpty?: boolean) => Promise<void>;
+  loadMore: (howMany?: number) => Promise<void>;
+  dogs: DogDetails[];
+  setEmpty: () => void;
 };
 
 export const useDogs = (initalHowMany = 10): UseDogs => {
@@ -26,20 +27,15 @@ export const useDogs = (initalHowMany = 10): UseDogs => {
     breedsData
   );
 
-  const loadMore = async (howMany = 4, setEmpty = false) => {
-    if (setEmpty) {
-      return setDogs([]);
-    }
-
+  const loadMore = async (howMany = 4) => {
     setLoading(true);
 
     const getDog = async () => {
       const randomIndex = getRandomArrayIndex(storagedBreeds);
       const breedName = storagedBreeds[randomIndex];
-      const DOGS_API = "https://dog.ceo/api/breed/";
-      const RANDOM_IMAGE = "/images/random";
+      const addressToFetch = `${process.env.NEXT_PUBLIC_DOG_API}${breedName}/images/random`;
 
-      const response = await fetch(`${DOGS_API}${breedName}${RANDOM_IMAGE}`);
+      const response = await fetch(addressToFetch);
 
       if (response.status !== 200) {
         throw new Error("Download error");
@@ -52,16 +48,13 @@ export const useDogs = (initalHowMany = 10): UseDogs => {
         status: fetchedDog.status,
         breedName,
         image: fetchedDog.message,
-        time: timeInMs,
+        downloadedAt: timeInMs,
       } as DogDetails;
     };
 
     try {
-      const promises = Array(howMany)
-        .fill(null)
-        .map(() => {
-          return getDog();
-        });
+      const promises = Array(howMany).fill(null).map(getDog);
+
       const newDogDetails = await Promise.allSettled(promises);
 
       const fulfilledNewDogDetails = newDogDetails
@@ -73,15 +66,18 @@ export const useDogs = (initalHowMany = 10): UseDogs => {
 
       setDogs((currentDogs) => [...currentDogs, ...fulfilledNewDogDetails]);
     } catch (error) {
+      console.error(error);
       setError(error);
     } finally {
       setLoading(false);
     }
   };
 
+  const setEmpty = () => setDogs([]);
+
   useEffect(() => {
     loadMore(initalHowMany);
   }, []);
 
-  return { dogs, loading, error, loadMore };
+  return { loading, error, loadMore, dogs, setEmpty };
 };

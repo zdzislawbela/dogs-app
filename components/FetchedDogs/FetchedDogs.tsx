@@ -24,7 +24,13 @@ export const FetchedDogs = () => {
   const observer = useRef<null | IntersectionObserver>(null);
 
   const waitForAll = () => {
-    const miliSeconds = isMosaic ? 6000 : 2500;
+    const DEFAULT_WAITING_TIME_IN_MLS = 2500;
+    const MOSAIC_WAITING_TIME_IN_MLS = 6000;
+
+    const miliSeconds = isMosaic
+      ? MOSAIC_WAITING_TIME_IN_MLS
+      : DEFAULT_WAITING_TIME_IN_MLS;
+
     setTimeout(() => {
       setIsScreenFilled(true);
     }, miliSeconds);
@@ -82,14 +88,14 @@ export const FetchedDogs = () => {
     >
       {storagedBreeds.length !== 0 &&
         dogs &&
-        dogs.map(({ image, breedName, time }, index) => {
+        dogs.map(({ image, breedName, downloadedAt }, index) => {
           return (
             <div
               className={
                 isMosaic ? `${style.dog} ${style.mosaicDog}` : `${style.dog}`
               }
               ref={useIntersectionObserver}
-              key={`${time} | ${image}`}
+              key={`${downloadedAt} | ${image}`}
             >
               <button
                 className={style.coverFetchedDogImage}
@@ -129,8 +135,8 @@ export const FetchedDogs = () => {
               alt='loading img placeholder'
             />
             <div className={style.contentCenter}>
-              <div>You didn't select any breed.</div>
-              <div>Go to:</div>
+              <span>You didn't select any breed. </span>
+              <span>Go to:</span>
               <div>
                 <Link href='/select-breeds'>
                   <button className={style.headerButton}>

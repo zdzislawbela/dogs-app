@@ -6,13 +6,13 @@ import Typography from "@material-ui/core/Typography";
 
 import { useStyles } from "./styles";
 
-type props = {
+type Props = {
   url: string;
   title: string;
   href: string;
 };
 
-export default function MainButton({ title, url, href }: props) {
+export default function MainButton({ title, url, href }: Props) {
   const classes = useStyles();
 
   return (
@@ -23,9 +23,6 @@ export default function MainButton({ title, url, href }: props) {
           key={title}
           className={classes.image}
           focusVisibleClassName={classes.focusVisible}
-          style={{
-            width: "80vw",
-          }}
         >
           <span
             className={classes.imageSrc}

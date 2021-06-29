@@ -7,7 +7,7 @@ export type DogDetails = {
   status: string;
   image: string;
   breedName: Breed;
-  time: number;
+  downloadedAt: number;
 };
 
 export type DogsDetails = DogDetails[];
@@ -39,6 +39,7 @@ export interface AppSharedState {
   loading: boolean;
   error?: Error;
   loadMore: (howMany?: number, setEmpty?: boolean) => Promise<void>;
+  setEmpty: () => void;
 }
 
 const AppContext = createContext<AppSharedState>({} as AppSharedState);
@@ -56,7 +57,7 @@ const AppSharedState = () => {
   const [modalDetails, setModalDetails] = useState<modalDetails>(null);
   const [isSelectAll, setIsSelectAll] = useState(true);
 
-  const { loading, error, dogs, loadMore } = useDogs();
+  const { loading, error, dogs, loadMore, setEmpty } = useDogs();
 
   if (typeof window !== "undefined") {
     const storagedBreedsExists = window.localStorage.getItem("selectedBreeds");
@@ -85,10 +86,12 @@ const AppSharedState = () => {
 
     isSelectAll,
     setIsSelectAll,
+
     loading,
     error,
     dogs,
     loadMore,
+    setEmpty,
   };
 };
 

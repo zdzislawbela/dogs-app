@@ -10,7 +10,7 @@ import styles from "../styles/Page.module.css";
 
 export default function SelectBreeds() {
   const {
-    loadMore,
+    setEmpty,
     isSelectAll,
     setIsSelectAll,
     storagedBreeds,
@@ -27,7 +27,7 @@ export default function SelectBreeds() {
     if (isSelectAll) {
       setStoragedBreeds([]);
     }
-    loadMore(0, true);
+    setEmpty();
   };
 
   const handleBreedCheckbox = (option: Breed) => {
@@ -49,7 +49,7 @@ export default function SelectBreeds() {
     if (!isBreedSelected) {
       includeToStorage(option);
     }
-    loadMore(0, true);
+    setEmpty();
   };
 
   const filterBreeds = (userInput: string) => {
