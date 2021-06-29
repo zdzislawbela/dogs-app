@@ -1,12 +1,13 @@
 import React, { createContext, useContext, useState, FC } from "react";
-import { Breed, breedsData } from "../data/breedsData";
+import { useBreeds } from "../hooks/useBreeds";
+import { useDogs } from "../hooks/useDogs";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export type DogDetails = {
   status: string;
   image: string;
-  breedName: Breed;
-  time: number;
+  breedName: string;
+  downloadedAt: number;
 };
 
 export type DogsDetails = DogDetails[];
@@ -19,33 +20,44 @@ export type likedDogsDetails = {
 export type modalDetails = { image: string; breed: string } | null;
 
 export interface AppSharedState {
-  loading: boolean;
-  setLoading: (loading: boolean) => void;
-  isError: string | boolean;
-  setIsError: (isError: string | boolean) => void;
-  modalDetails: modalDetails;
-  setModalDetails: (modalDetails: modalDetails) => void;
-  fetchedDogs: DogsDetails;
-  setFetchedDogs: (fetchedDogs: DogsDetails) => void;
+  isMosaic: boolean;
+  setIsMosaic: (isMosaic: boolean) => void;
+
   likedDogs: likedDogsDetails;
   setLikedDogs: (likedDogs: likedDogsDetails) => void;
 
-  apiCallCounter: number;
-  setApiCallCounter: (apiCallCounter: number) => void;
+  storagedBreeds: string[];
+  setStoragedBreeds: (breeds: string[]) => void;
+
+  modalDetails: modalDetails;
+  setModalDetails: (modalDetails: modalDetails) => void;
 
   isSelectAll: boolean;
   setIsSelectAll: (isSelectAll: boolean) => void;
 
-  storagedBreeds: string[];
-  setStoragedBreeds: (breeds: string[]) => void;
+  breeds: string[];
+  loadingBreeds: boolean;
+  errorBreeds?: Error;
+  loadBreeds: () => Promise<void>;
+
+  dogs: DogDetails[];
+  loading: boolean;
+  error?: Error;
+  loadMore: (howMany?: number, setEmpty?: boolean) => Promise<void>;
+  setEmpty: () => void;
 }
 
 const AppContext = createContext<AppSharedState>({} as AppSharedState);
 
 const AppSharedState = () => {
+  const { loadingBreeds, errorBreeds, loadBreeds, breeds } = useBreeds();
+  const [isMosaic, setIsMosaic] = useState(false);
+  const [modalDetails, setModalDetails] = useState<modalDetails>(null);
+  const [isSelectAll, setIsSelectAll] = useState(true);
+
   const [storagedBreeds, setStoragedBreeds] = useLocalStorage<string[]>(
     "selectedBreeds",
-    breedsData
+    breeds
   );
 
   const [likedDogs, setLikedDogs] = useLocalStorage<likedDogsDetails>(
@@ -53,10 +65,12 @@ const AppSharedState = () => {
     []
   );
 
+  const { loading, error, dogs, loadMore, setEmpty } = useDogs();
+
   if (typeof window !== "undefined") {
     const storagedBreedsExists = window.localStorage.getItem("selectedBreeds");
     if (!storagedBreedsExists) {
-      setStoragedBreeds(breedsData);
+      setStoragedBreeds(breeds);
     }
 
     const likedDogsExists = window.localStorage.getItem("likedDogs");
@@ -65,30 +79,32 @@ const AppSharedState = () => {
     }
   }
 
-  const [loading, setLoading] = useState(true);
-  const [isError, setIsError] = useState<string | boolean>(false);
-  const [modalDetails, setModalDetails] = useState<modalDetails>(null);
-  const [fetchedDogs, setFetchedDogs] = useState<DogsDetails>([]);
-  const [apiCallCounter, setApiCallCounter] = useState(0);
-  const [isSelectAll, setIsSelectAll] = useState(true);
-
   return {
-    loading,
-    setLoading,
-    isError,
-    setIsError,
+    isMosaic,
+    setIsMosaic,
+
     modalDetails,
     setModalDetails,
-    fetchedDogs,
-    setFetchedDogs,
+
     likedDogs,
     setLikedDogs,
-    apiCallCounter,
-    setApiCallCounter,
-    isSelectAll,
-    setIsSelectAll,
+
     storagedBreeds,
     setStoragedBreeds,
+
+    isSelectAll,
+    setIsSelectAll,
+
+    loadingBreeds,
+    errorBreeds,
+    loadBreeds,
+    breeds,
+
+    loading,
+    error,
+    dogs,
+    loadMore,
+    setEmpty,
   };
 };
 

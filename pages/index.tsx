@@ -1,5 +1,5 @@
 import Head from "next/head";
-import MainButton from "../components/Buttons/MainButton";
+import MainButton from "../components/Buttons/MainButton/MainButton";
 import styles from "../styles/Page.module.css";
 
 export default function Home() {

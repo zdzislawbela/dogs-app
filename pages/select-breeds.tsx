@@ -1,6 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
-import { Breed, breedsData } from "../data/breedsData";
+import React, { useEffect, useState } from "react";
 import { useAppContext } from "../context";
 
 import { BreedCheckbox } from "../components/BreedCheckbox/BreedCheckbox";
@@ -10,36 +9,35 @@ import styles from "../styles/Page.module.css";
 
 export default function SelectBreeds() {
   const {
-    setFetchedDogs,
+    setEmpty,
     isSelectAll,
     setIsSelectAll,
     storagedBreeds,
     setStoragedBreeds,
+    breeds,
+    loadBreeds,
   } = useAppContext();
   const [keyword, setKeyword] = useState("");
 
   const handleSelectAll = () => {
-    setFetchedDogs([]);
-
     setIsSelectAll(!isSelectAll);
 
     if (!isSelectAll) {
-      setStoragedBreeds(breedsData);
+      setStoragedBreeds(breeds);
     }
     if (isSelectAll) {
       setStoragedBreeds([]);
     }
+    setEmpty();
   };
 
-  const handleBreedCheckbox = (option: Breed) => {
-    setFetchedDogs([]);
-
-    const excludeFromStorage = (option: Breed) => {
+  const handleBreedCheckbox = (option: string) => {
+    const excludeFromStorage = (option: string) => {
       const filteredBreeds = storagedBreeds.filter((breed) => breed !== option);
       setStoragedBreeds(filteredBreeds);
     };
 
-    const includeToStorage = (option: Breed) => {
+    const includeToStorage = (option: string) => {
       const extendedBreeds = [...storagedBreeds, option].sort();
       setStoragedBreeds(extendedBreeds);
     };
@@ -52,7 +50,9 @@ export default function SelectBreeds() {
     if (!isBreedSelected) {
       includeToStorage(option);
     }
+    setEmpty();
   };
+
   const filterBreeds = (userInput: string) => {
     setKeyword(userInput);
   };
@@ -76,7 +76,7 @@ export default function SelectBreeds() {
             isChecked={isSelectAll}
           />
         </div>
-        {breedsData
+        {breeds
           .filter((breed) => breed.includes(keyword))
           .map((breed) => {
             const isBreedSelected = storagedBreeds.includes(breed);

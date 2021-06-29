@@ -6,11 +6,12 @@ import { useAppContext } from "../context";
 import style from "../styles/Page.module.css";
 
 export default function Fetch() {
-  const { fetchedDogs } = useAppContext();
-  const numberOfDogs = fetchedDogs.length;
+  const { dogs, loading } = useAppContext();
+  const numberOfDogs = dogs.length;
+
   let titleOfPage = `🐕 You fetched ${numberOfDogs} dogs!`;
 
-  if (fetchedDogs.length === 0) {
+  if (loading) {
     titleOfPage = "🐕 Loading ...";
   }
 
