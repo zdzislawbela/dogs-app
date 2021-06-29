@@ -23,20 +23,6 @@ export const FetchedDogs = () => {
   const [isScreenFilled, setIsScreenFilled] = useState(false);
   const observer = useRef<null | IntersectionObserver>(null);
 
-  const waitForAll = () => {
-    const DEFAULT_WAITING_TIME_IN_MLS = 2500;
-    const MOSAIC_WAITING_TIME_IN_MLS = 6000;
-
-    const miliSeconds = isMosaic
-      ? MOSAIC_WAITING_TIME_IN_MLS
-      : DEFAULT_WAITING_TIME_IN_MLS;
-
-    setTimeout(() => {
-      setIsScreenFilled(true);
-    }, miliSeconds);
-  };
-  waitForAll();
-
   const useIntersectionObserver = useCallback(
     (node) => {
       if (loading) return;
@@ -76,6 +62,21 @@ export const FetchedDogs = () => {
 
   useEffect(() => {
     loadMore();
+  }, []);
+
+  useEffect(() => {
+    const DEFAULT_WAITING_TIME_IN_MLS = 2000;
+    const MOSAIC_WAITING_TIME_IN_MLS = 3000;
+
+    const miliSeconds = isMosaic
+      ? MOSAIC_WAITING_TIME_IN_MLS
+      : DEFAULT_WAITING_TIME_IN_MLS;
+
+    const timer = setTimeout(() => {
+      setIsScreenFilled(true);
+    }, miliSeconds);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
