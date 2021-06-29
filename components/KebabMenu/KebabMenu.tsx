@@ -10,8 +10,11 @@ import { useAppContext } from "../../context";
 import { KebabIcon } from "./KebabIcon";
 
 import style from "./KebabMenu.module.css";
+import { useStyles } from "./styles";
 
 export const KebabMenu = () => {
+  const classes = useStyles();
+
   const { isMosaic, setIsMosaic } = useAppContext();
 
   const router = useRouter();
@@ -51,7 +54,7 @@ export const KebabMenu = () => {
   const ITEM_HEIGHT = 48;
 
   return (
-    <button className={`${style.headerButton} ${style.kebab}`}>
+    <div>
       <IconButton
         aria-label='more'
         aria-controls='long-menu'
@@ -63,7 +66,7 @@ export const KebabMenu = () => {
       </IconButton>
 
       <Menu
-        className={style.menu}
+        className={classes.menu}
         id='long-menu'
         anchorEl={anchorEl}
         keepMounted
@@ -76,8 +79,8 @@ export const KebabMenu = () => {
           },
         }}
       >
-        <div className={style.kebabOptionsContainer}>
-          <div className={style.kebabOptions}>
+        <div className={classes.kebabOptionsContainer}>
+          <div>
             {router.pathname === "/fetch" ? (
               <MenuItem key='Mosaic' onClick={() => toggleMosaic()}>
                 {isMosaic ? "Turn off mosaic" : "Switch to mosaic"}
@@ -91,6 +94,6 @@ export const KebabMenu = () => {
           </div>
         </div>
       </Menu>
-    </button>
+    </div>
   );
 };
