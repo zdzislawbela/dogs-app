@@ -15,7 +15,6 @@ export default function SelectBreeds() {
     storagedBreeds,
     setStoragedBreeds,
     breeds,
-    loadBreeds,
   } = useAppContext();
   const [keyword, setKeyword] = useState("");
 

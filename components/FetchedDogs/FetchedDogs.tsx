@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
+import Link from "next/link";
 
 import { likedDogsDetails, useAppContext } from "../../context";
-
 import { HeartButton } from "../Buttons/HeartButton/HeartButton";
 import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
+import { formatBreed } from "../helpers/formatBreed";
 
 import style from "./FetchedDogs.module.css";
-import Link from "next/link";
 
 export const FetchedDogs = () => {
   const {
@@ -121,7 +121,7 @@ export const FetchedDogs = () => {
                 }
               >
                 <HeartButton image={image} breed={breedName} />
-                <p className={style.dogtitle}>{breedName}</p>
+                <p className={style.dogtitle}>{formatBreed(breedName)}</p>
               </div>
             </div>
           );
