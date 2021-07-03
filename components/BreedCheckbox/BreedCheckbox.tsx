@@ -4,6 +4,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import style from "./BreedCheckbox.module.css";
+import { formatBreed } from "../helpers/formatBreed";
 
 type Props = {
   breed: string;
@@ -24,7 +25,7 @@ export const BreedCheckbox = ({ breed, handleCheckbox, isChecked }: Props) => {
             <FormControlLabel
               value={breed}
               control={<Checkbox color='primary' onChange={handleChange} />}
-              label={breed}
+              label={formatBreed(breed)}
               labelPlacement='end'
               checked={isChecked}
             />
