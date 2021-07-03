@@ -1,15 +1,11 @@
 export const formatBreed = (breed: string) => {
-  const removeSlash = (breed: string) => {
-    if (!breed.includes("/")) return breed;
+  const [mainBreed, subBreed] = breed.split("/");
 
-    const [mainBreed, subBreed] = breed.split("/");
-    return `${subBreed} ${mainBreed}`;
-  };
-
-  const capitalizeFirstLetter = (breed: string) => {
+  if (!subBreed) {
     return breed.charAt(0).toUpperCase() + breed.slice(1);
-  };
+  }
 
-  const removedSlash = removeSlash(breed);
-  return capitalizeFirstLetter(removedSlash);
+  return `${subBreed.charAt(0).toUpperCase() + subBreed.slice(1)} ${
+    mainBreed.charAt(0).toUpperCase() + mainBreed.slice(1)
+  }`;
 };
