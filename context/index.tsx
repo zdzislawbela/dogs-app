@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState, FC } from "react";
-import { useBreeds } from "../hooks/useBreeds";
-import { useDogs } from "../hooks/useDogs";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import React, { createContext, useContext, useState, FC } from 'react';
+import { useBreeds } from '../hooks/useBreeds';
+import { useDogs } from '../hooks/useDogs';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export type DogDetails = {
   status: string;
@@ -37,12 +37,12 @@ export interface AppSharedState {
 
   breeds: string[];
   loadingBreeds: boolean;
-  errorBreeds?: Error;
+  errorBreeds?: unknown;
   loadBreeds: () => Promise<void>;
 
   dogs: DogDetails[];
   loading: boolean;
-  error?: Error;
+  error?: unknown;
   loadMore: (howMany?: number, setEmpty?: boolean) => Promise<void>;
   setEmpty: () => void;
 }
@@ -56,24 +56,24 @@ const AppSharedState = () => {
   const [isSelectAll, setIsSelectAll] = useState(true);
 
   const [storagedBreeds, setStoragedBreeds] = useLocalStorage<string[]>(
-    "selectedBreeds",
+    'selectedBreeds',
     breeds
   );
 
   const [likedDogs, setLikedDogs] = useLocalStorage<likedDogsDetails>(
-    "likedDogs",
+    'likedDogs',
     []
   );
 
   const { loading, error, dogs, loadMore, setEmpty } = useDogs();
 
-  if (typeof window !== "undefined") {
-    const storagedBreedsExists = window.localStorage.getItem("selectedBreeds");
+  if (typeof window !== 'undefined') {
+    const storagedBreedsExists = window.localStorage.getItem('selectedBreeds');
     if (!storagedBreedsExists) {
       setStoragedBreeds(breeds);
     }
 
-    const likedDogsExists = window.localStorage.getItem("likedDogs");
+    const likedDogsExists = window.localStorage.getItem('likedDogs');
     if (!likedDogsExists) {
       setLikedDogs([]);
     }

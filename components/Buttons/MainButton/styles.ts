@@ -37,7 +37,6 @@ export const useStyles = makeStyles(
     },
     focusVisible: {},
     imageButton: {
-      position: "absolute",
       left: 20,
       right: 0,
       top: 0,
@@ -68,9 +67,8 @@ export const useStyles = makeStyles(
     },
     imageTitle: {
       position: "relative",
-      padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${
-        theme.spacing(1) + 6
-      }px`,
+      padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6
+        }px`,
       fontSize: "1.2rem",
     },
     imageMarked: {

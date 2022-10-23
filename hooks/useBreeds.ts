@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useAppContext } from "../context";
+import { useEffect, useState } from 'react';
+import { useAppContext } from '../context';
 
 type UseBreeds = {
   breeds: string[];
   loadingBreeds: boolean;
-  errorBreeds?: Error;
+  errorBreeds?: unknown;
   loadBreeds: () => Promise<void>;
 };
 
@@ -15,7 +15,7 @@ export interface BreedsDetails {
 
 export const useBreeds = (): UseBreeds => {
   const [loadingBreeds, setLoadingBreeds] = useState(false);
-  const [errorBreeds, setErrorBreeds] = useState<Error>();
+  const [errorBreeds, setErrorBreeds] = useState<unknown>();
   const [breeds, setBreeds] = useState<string[]>([]);
 
   const loadBreeds = async () => {
@@ -26,7 +26,7 @@ export const useBreeds = (): UseBreeds => {
       const response = await fetch(addressToFetchAllBreeds);
 
       if (response.status !== 200) {
-        throw new Error("Download error");
+        throw new Error('Download error');
       }
 
       const fetchedBreeds = (await response.json()) as BreedsDetails;

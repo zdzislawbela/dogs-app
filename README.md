@@ -14,8 +14,10 @@
 
 ## How to start locally:
 
+- create `.env.local` from `.env.local.example`
+
+- start locally:
+
 ```bash
-npm run dev
-# or
-yarn dev
+yarn install && yarn dev
 ```

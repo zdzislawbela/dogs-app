@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { DogDetails, useAppContext } from "../context";
-import { useLocalStorage } from "./useLocalStorage";
-import { getRandomArrayIndex } from "../utils/getRandomArrayIndex";
+import { useEffect, useState } from 'react';
+import { DogDetails, useAppContext } from '../context';
+import { useLocalStorage } from './useLocalStorage';
+import { getRandomArrayIndex } from '../utils/getRandomArrayIndex';
 
 type FetchedDog = {
   message: string;
@@ -10,24 +10,24 @@ type FetchedDog = {
 
 type UseDogs = {
   loading: boolean;
-  error?: Error;
+  error?: unknown;
   loadMore: (howMany?: number) => Promise<void>;
   dogs: DogDetails[];
   setEmpty: () => void;
 };
 
 interface PromiseFulfilledResult<T> {
-  status: "fulfilled";
+  status: 'fulfilled';
   value: T;
 }
 
 export const useDogs = (initalHowMany = 10): UseDogs => {
   const { breeds } = useAppContext();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error>();
+  const [error, setError] = useState<unknown>();
   const [dogs, setDogs] = useState<DogDetails[]>([]);
 
-  const [storagedBreeds] = useLocalStorage<string[]>("selectedBreeds", breeds);
+  const [storagedBreeds] = useLocalStorage<string[]>('selectedBreeds', breeds);
 
   const loadMore = async (howMany = 4) => {
     setLoading(true);
@@ -40,7 +40,7 @@ export const useDogs = (initalHowMany = 10): UseDogs => {
       const response = await fetch(addressToFetch);
 
       if (response.status !== 200) {
-        throw new Error("Download error");
+        throw new Error('Download error');
       }
 
       const fetchedDog = (await response.json()) as FetchedDog;
@@ -60,7 +60,7 @@ export const useDogs = (initalHowMany = 10): UseDogs => {
       const newDogDetails = await Promise.allSettled(promises);
 
       const fulfilledNewDogDetails = newDogDetails
-        .filter((promise) => promise.status === "fulfilled")
+        .filter((promise) => promise.status === 'fulfilled')
         .map((fulfilledPromise) => {
           return (fulfilledPromise as PromiseFulfilledResult<DogDetails>).value;
         });
@@ -68,6 +68,7 @@ export const useDogs = (initalHowMany = 10): UseDogs => {
       setDogs((currentDogs) => [...currentDogs, ...fulfilledNewDogDetails]);
     } catch (error) {
       console.error(error);
+
       setError(error);
     } finally {
       setLoading(false);

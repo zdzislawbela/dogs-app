@@ -21,7 +21,9 @@ export default function Liked() {
         />
         <link rel='icon' href='/favicon.png' />
       </Head>
-      <ParticleBackground />{" "}
+
+      <ParticleBackground />
+
       <div className={styles.likedDogsContainer}>
         {likedDogs.length !== 0 ? (
           <LikedDogs />

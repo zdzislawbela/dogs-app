@@ -1,17 +1,21 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import Link from "next/link";
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import Link from 'next/link';
+import clsx from 'clsx';
 
-import { likedDogsDetails, useAppContext } from "../../context";
-import { HeartButton } from "../Buttons/HeartButton/HeartButton";
-import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
-import { formatBreed } from "../helpers/formatBreed";
+import { likedDogsDetails, useAppContext } from '../../context';
+import { HeartButton } from '../Buttons/HeartButton/HeartButton';
+import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
+import { formatBreed } from '../helpers/formatBreed';
 
-import style from "./FetchedDogs.module.css";
+import style from './FetchedDogs.module.css';
+
+const DEFAULT_WAITING_TIME_IN_MLS = 2000;
+const MOSAIC_WAITING_TIME_IN_MLS = 3000;
 
 export const FetchedDogs = () => {
   const {
     loading,
-    error,
+    // error,
     dogs,
     loadMore,
     isMosaic,
@@ -21,7 +25,11 @@ export const FetchedDogs = () => {
   } = useAppContext();
 
   const [isScreenFilled, setIsScreenFilled] = useState(false);
+
   const observer = useRef<null | IntersectionObserver>(null);
+  const milisecondsToReset = isMosaic
+    ? MOSAIC_WAITING_TIME_IN_MLS
+    : DEFAULT_WAITING_TIME_IN_MLS;
 
   const useIntersectionObserver = useCallback(
     (node) => {
@@ -43,7 +51,7 @@ export const FetchedDogs = () => {
   const handleDoubleClick = (image: string, breed: string) => {
     clearTimeout(0);
 
-    const images = likedDogs.map((dog) => dog.image);
+    const images = likedDogs.map(({ image }) => image);
     const isLiked = images.includes(image);
 
     if (isLiked) {
@@ -65,31 +73,23 @@ export const FetchedDogs = () => {
   }, []);
 
   useEffect(() => {
-    const DEFAULT_WAITING_TIME_IN_MLS = 2000;
-    const MOSAIC_WAITING_TIME_IN_MLS = 3000;
-
-    const miliSeconds = isMosaic
-      ? MOSAIC_WAITING_TIME_IN_MLS
-      : DEFAULT_WAITING_TIME_IN_MLS;
-
     const timer = setTimeout(() => {
       setIsScreenFilled(true);
-    }, miliSeconds);
+    }, milisecondsToReset);
 
     return () => clearTimeout(timer);
   }, []);
 
+  const shouldShowFetchedDogs = storagedBreeds.length !== 0 && dogs;
+
   return (
     <div
-      className={
-        isMosaic
-          ? `${style.dogsContainer} ${style.mosaicDogsContainer}`
-          : `${style.dogsContainer}`
-      }
+      className={clsx(style.dogsContainer, {
+        [style.mosaicDogsContainer]: isMosaic,
+      })}
     >
-      {storagedBreeds.length !== 0 &&
-        dogs &&
-        dogs.map(({ image, breedName, downloadedAt }, index) => {
+      {shouldShowFetchedDogs &&
+        dogs.map(({ image, breedName, downloadedAt }) => {
           return (
             <div
               className={
@@ -110,7 +110,7 @@ export const FetchedDogs = () => {
                     : `${style.dogImg}`
                 }
                 src={image}
-                alt='dog'
+                alt="dog"
               />
 
               <div
@@ -121,6 +121,7 @@ export const FetchedDogs = () => {
                 }
               >
                 <HeartButton image={image} breed={breedName} />
+
                 <p className={style.dogtitle}>{formatBreed(breedName)}</p>
               </div>
             </div>
@@ -132,14 +133,14 @@ export const FetchedDogs = () => {
           <div className={style.dog}>
             <img
               className={style.dogImg}
-              src='/loading-dog.jpg'
-              alt='loading img placeholder'
+              src="/loading-dog.jpg"
+              alt="loading img placeholder"
             />
             <div className={style.contentCenter}>
               <span>You didn't select any breed. </span>
               <span>Go to:</span>
               <div>
-                <Link href='/select-breeds'>
+                <Link href="/filter">
                   <button className={style.headerButton}>
                     <a> Select 🔎</a>
                   </button>
@@ -157,9 +158,10 @@ export const FetchedDogs = () => {
           <div className={style.dogImgCover}>
             <img
               className={style.dogImg}
-              src='/loading-dog.jpg'
-              alt='loading img placeholder'
+              src="/loading-dog.jpg"
+              alt="loading img placeholder"
             />
+
             <LoadingSpinner />
           </div>
           <div className={style.dogCaption}>

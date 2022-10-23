@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import Head from "next/head";
-import { Header } from "../Header/Header";
+import { Menu } from "../Menu/Menu";
 import style from "./Layout.module.css";
 
 type Props = {
@@ -17,7 +17,7 @@ export const Layout = ({ children }: Props) => {
         />
       </Head>
       <div className={style.header}>
-        <Header />
+        <Menu />
       </div>
       {children}
     </>

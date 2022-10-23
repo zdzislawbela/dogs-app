@@ -1,34 +1,50 @@
-import Head from "next/head";
-import MainButton from "../components/Buttons/MainButton/MainButton";
-import styles from "../styles/Page.module.css";
+import Head from 'next/head';
+import MainButton from '../components/Buttons/MainButton/MainButton';
+import { LinkWithTooltip } from '../components/LinkWithTooltip';
+import styles from '../styles/Page.module.css';
+
+const buttons = [
+  { title: 'Select breed', url: '/dog-breeds-button.jpg', href: '/filter' },
+  {
+    title: 'Start fetching',
+    url: '/start-fetching-button.jpg',
+    href: '/fetch',
+  },
+];
+
+const title = '🐕 Pictures of dogs';
+const welcomeText = 'Welcome to Dogs App';
+const description =
+  'Here you can find a lot of loyal, active, playful, fluffy and excited dogs!';
+const dogCeoLink = 'https://dog.ceo/';
+const moreDescription = `Collection of open source dog pictures delivered by: `;
+const tooltipText =
+  'The Dog CEO Dog API allows developers to access and integrate over 20,000 images of dogs from over 120 breeds with other applications. The images are supplied by the Stanford Dogs Dataset.';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>🐕 Pictures of dogs</title>
-        <meta
-          name='description'
-          content='Collecting open source dog pictures from dog.ceo'
-        />
-        <link rel='icon' href='/favicon.png' />
+        <title>{title}</title>
       </Head>
-      <div className={styles.main}>
-        <h3 className={styles.title}>Welcome to 🐕 App</h3>
 
-        <div className={styles.buttonsContainer}>
-          <MainButton
-            title='Select breeds'
-            url='/dog-breeds-button.jpg'
-            href='/select-breeds'
-          />
-          <MainButton
-            title='Start fetching'
-            url='/start-fetching-button.jpg'
-            href='/fetch'
-          />
+      <div className={styles.container}>
+        <div className={styles.main}>
+          <h1 className={styles.title}>{welcomeText}</h1>
+
+          <p className={styles.description}>{description}</p>
+          <p className={styles.description}>
+            {moreDescription}
+            <LinkWithTooltip href={dogCeoLink} tooltipText={tooltipText} />
+          </p>
+
+          <div className={styles.buttonsContainer}>
+            {buttons.map((button) => {
+              return <MainButton key={button.href} {...button} />;
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
