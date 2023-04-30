@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { likedDogsDetails, useAppContext } from '../../context';
 import { HeartButton } from '../Buttons/HeartButton/HeartButton';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
-import { formatBreed } from '../helpers/formatBreed';
+import { formatBreed } from '../../utils/helpers/formatBreed';
 
 import style from './FetchedDogs.module.css';
 
