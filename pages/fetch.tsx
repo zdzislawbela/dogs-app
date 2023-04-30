@@ -1,10 +1,8 @@
 import Head from 'next/head';
-import React, { useEffect, useMemo, useState } from 'react';
-import clsx from 'clsx';
+import React, { useEffect, useState } from 'react';
 
 import { FetchedDogs } from '../components/FetchedDogs/FetchedDogs';
 import { useAppContext } from '../context';
-import { useScreenWidth } from '../hooks/useScreenWidth';
 
 import style from '../styles/Page.module.css';
 
@@ -16,6 +14,7 @@ export default function Fetch() {
     if (loading) {
       return setPageTitle('🐕 Loading ...');
     }
+
     setPageTitle(`🐕 You fetched ${dogs.length} dogs!`);
   }, [dogs.length, loading]);
 
