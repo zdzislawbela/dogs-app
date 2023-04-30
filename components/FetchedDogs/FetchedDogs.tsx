@@ -1,21 +1,20 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
-
 import { likedDogsDetails, useAppContext } from '../../context';
 import { HeartButton } from '../Buttons/HeartButton/HeartButton';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
-import { formatBreed } from '../../utils/helpers/formatBreed';
 
 import style from './FetchedDogs.module.css';
-
-const DEFAULT_WAITING_TIME_IN_MLS = 2000;
-const MOSAIC_WAITING_TIME_IN_MLS = 3000;
+import {
+  DEFAULT_WAITING_TIME_IN_MLS,
+  MOSAIC_WAITING_TIME_IN_MLS,
+} from '../../utils/constants/time';
+import { formatBreed } from '../../utils/helpers/formatBreed';
 
 export const FetchedDogs = () => {
   const {
     loading,
-    // error,
     dogs,
     loadMore,
     isMosaic,
@@ -27,6 +26,7 @@ export const FetchedDogs = () => {
   const [isScreenFilled, setIsScreenFilled] = useState(false);
 
   const observer = useRef<null | IntersectionObserver>(null);
+
   const milisecondsToReset = isMosaic
     ? MOSAIC_WAITING_TIME_IN_MLS
     : DEFAULT_WAITING_TIME_IN_MLS;
@@ -69,6 +69,12 @@ export const FetchedDogs = () => {
   };
 
   useEffect(() => {
+    const currentPosition = window.pageYOffset;
+
+    if (dogs.length && !currentPosition) {
+      return;
+    }
+
     loadMore();
   }, []);
 
@@ -150,24 +156,29 @@ export const FetchedDogs = () => {
           </div>
         </div>
       ) : (
-        <div
-          className={
-            isScreenFilled ? `${style.dog}` : `${style.fullscreenCoverLoading}`
-          }
-        >
-          <div className={style.dogImgCover}>
-            <img
-              className={style.dogImg}
-              src="/loading-dog.jpg"
-              alt="loading img placeholder"
-            />
+        !shouldShowFetchedDogs && (
+          <div
+            className={
+              isScreenFilled
+                ? `${style.dog}`
+                : `${style.fullscreenCoverLoading}`
+            }
+          >
+            <div className={style.dogImgCover}>
+              <img
+                className={style.dogImg}
+                src="/loading-dog.jpg"
+                alt="loading img placeholder"
+              />
 
-            <LoadingSpinner />
+              <LoadingSpinner />
+            </div>
+
+            <div className={style.dogCaption}>
+              <p className={style.dogtitle}>LOADING</p>
+            </div>
           </div>
-          <div className={style.dogCaption}>
-            <p className={style.dogtitle}>LOADING</p>
-          </div>
-        </div>
+        )
       )}
     </div>
   );

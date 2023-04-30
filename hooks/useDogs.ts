@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DogDetails, useAppContext } from '../context';
 import { useLocalStorage } from './useLocalStorage';
-import { getRandomArrayIndex } from '../utils/getRandomArrayIndex';
+import { getRandomArrayIndex } from '../utils/helpers/getRandomArrayIndex';
 
 type FetchedDog = {
   message: string;
