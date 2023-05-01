@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import { useAppContext } from '../context';
 import { BreedCheckbox } from '../components/BreedCheckbox/BreedCheckbox';
 import { SearchBreedInput } from '../components/SearchBreedInput/SearchBreedInput';
+import { useSwipeable } from 'react-swipeable';
 
 import styles from '../styles/Page.module.css';
+import router from 'next/router';
 
 export default function Filter() {
   const {
@@ -17,6 +19,19 @@ export default function Filter() {
     breeds,
   } = useAppContext();
   const [keyword, setKeyword] = useState('');
+
+  const handleSwipeLeft = () => {
+    router.push('/fetch');
+  };
+
+  const handleSwipeRight = () => {
+    router.push('/');
+  };
+
+  const handlers = useSwipeable({
+    onSwipedLeft: handleSwipeLeft,
+    onSwipedRight: handleSwipeRight,
+  });
 
   const handleSelectAll = () => {
     setIsSelectAll(!isSelectAll);
@@ -62,7 +77,7 @@ export default function Filter() {
         <title>🐕 Select Breeds</title>
       </Head>
 
-      <div className={styles.mainSelectBreed}>
+      <div {...handlers} className={styles.mainSelectBreed}>
         <div className={styles.breeds}>
           <SearchBreedInput filterBreeds={filterBreeds} />
           <div className={styles.breed}>
