@@ -33,12 +33,6 @@
   padding-top: 20px;
 }
 
-.navButton:hover {
-  background-color: rgba(208, 208, 208, 0.312);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
 .houseIcon {
   background: url('../../public/house.svg');
   background-repeat: no-repeat;
@@ -47,6 +41,18 @@
 
 .filterIcon {
   background: url('../../public/filter.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.mosaicIconON {
+  background: url('../../public/mosaicON.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.mosaicIconOFF {
+  background: url('../../public/mosaicOFF.svg');
   background-repeat: no-repeat;
   background-position: center;
 }
