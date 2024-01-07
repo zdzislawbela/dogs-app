@@ -12,7 +12,7 @@ interface Props {
 const aboutDogCeoId = 'aboutDogCeoId';
 export const LinkWithTooltip = ({ href, label, tooltipText }: Props) => {
   return (
-    <div className={styles.container}>
+    <span className={styles.container}>
       <a
         className={styles.link}
         href={href}
@@ -32,6 +32,6 @@ export const LinkWithTooltip = ({ href, label, tooltipText }: Props) => {
       >
         {tooltipText}
       </ReactTooltip>
-    </div>
+    </span>
   );
 };

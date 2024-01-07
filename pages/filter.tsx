@@ -21,7 +21,7 @@ export default function Filter() {
   const [keyword, setKeyword] = useState('');
 
   const handleSwipeLeft = () => {
-    router.push('/fetch');
+    router.push('/');
   };
 
   const handleSwipeRight = () => {

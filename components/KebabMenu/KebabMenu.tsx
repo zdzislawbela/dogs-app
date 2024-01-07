@@ -5,17 +5,12 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import { useAppContext } from "../../context";
-
 import { KebabIcon } from "./KebabIcon";
 
-import style from "./KebabMenu.module.css";
 import { useStyles } from "./styles";
 
 export const KebabMenu = () => {
   const classes = useStyles();
-
-  const { isMosaic, setIsMosaic } = useAppContext();
 
   const router = useRouter();
 
@@ -35,21 +30,6 @@ export const KebabMenu = () => {
     router.push(routerPath);
   };
 
-  const toggleMosaic = () => {
-    const innerWidth = window.innerWidth;
-    if (isMosaic) {
-      handleClose();
-      return setIsMosaic(!isMosaic);
-    }
-
-    if (innerWidth > 451) {
-      handleClose();
-      return alert("Only for screens width below 450 px. Sorry. ");
-    }
-
-    setIsMosaic(!isMosaic);
-    handleClose();
-  };
 
   const ITEM_HEIGHT = 48;
 
@@ -81,13 +61,6 @@ export const KebabMenu = () => {
       >
         <div className={classes.kebabOptionsContainer}>
           <div>
-            {router.pathname === "/fetch" ? (
-              <MenuItem key='Mosaic' onClick={() => toggleMosaic()}>
-                {isMosaic ? "Turn off mosaic" : "Switch to mosaic"}
-              </MenuItem>
-            ) : (
-              ""
-            )}
             <MenuItem key='About' onClick={() => openPage("/about")}>
               About
             </MenuItem>

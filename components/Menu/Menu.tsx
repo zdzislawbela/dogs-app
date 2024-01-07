@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 
@@ -7,52 +7,62 @@ import { KebabMenu } from '../KebabMenu/KebabMenu';
 import styles from './Menu.module.css';
 import { useAppContext } from '../../context';
 import { useRouter } from 'next/router';
+import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export const Menu = () => {
-  const { dogs, likedDogs } = useAppContext();
+  const { dogs, likedDogs, isMosaic, setIsMosaic } = useAppContext();
   const { pathname } = useRouter();
   const numberOfFetchedDogs = dogs.length;
   const numberOfLikedDogs = likedDogs.length;
+  const isHomePage = pathname === '/';
+  const screenWidth = useScreenWidth();
+  const shouldShowMosaic = screenWidth && screenWidth < 451;
 
-  const navButtons = [
-    { href: '/', label: 'Home', underElement: '', iconClass: styles.houseIcon },
+  const defaultNavigationItems = [
     {
-      href: '/filter',
-      label: 'Filter',
-      badge: '',
-      iconClass: styles.filterIcon,
-    },
-    {
-      href: '/fetch',
-      label: 'Fetch',
-      badge: (
-        <p className={styles.fetchedCounterLabel}> {numberOfFetchedDogs}</p>
-      ),
+      href: '/',
+      underElement: '',
+      badge: <p className={styles.counterLabel}> {numberOfFetchedDogs}</p>,
       iconClass: styles.dogIcon,
     },
     {
       href: '/liked',
-      label: 'Liked',
-      badge: <p className={styles.likedCounterLabel}> {numberOfLikedDogs}</p>,
+      badge: <p className={styles.counterLabel}> {numberOfLikedDogs}</p>,
       iconClass: styles.heartIcon,
+    },
+    {
+      href: '/filter',
+      badge: '',
+      iconClass: styles.filterIcon,
     },
   ];
 
+  const toggleMosaic = () => {
+    setIsMosaic(!isMosaic);
+  };
+
   return (
     <div className={styles.menu}>
-      {navButtons.map(({ href, label, badge, iconClass }) => (
+      {defaultNavigationItems.map(({ href, badge, iconClass }) => (
         <Link key={href} href={href}>
           <button
             className={clsx(styles.navButton, iconClass, {
               [styles.selected]: pathname === href,
             })}
           >
-            <a className={styles.label}>{label}</a>
             {badge}
           </button>
         </Link>
       ))}
-
+      {isHomePage && shouldShowMosaic && (
+        <button
+          onClick={toggleMosaic}
+          className={clsx(styles.navButton, {
+            [styles.mosaicIconON]: isMosaic,
+            [styles.mosaicIconOFF]: !isMosaic,
+          })}
+        ></button>
+      )}
       <KebabMenu />
     </div>
   );
