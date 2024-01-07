@@ -1,8 +1,8 @@
-import React from "react";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import { useAppContext } from "../../../context";
+import React from 'react';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import { useAppContext } from '../../../context/AppContext';
 
-import styles from "./RemoveFromLikeListButton.module.css";
+import styles from './RemoveFromLikeListButton.module.css';
 
 type Props = {
   image: string;

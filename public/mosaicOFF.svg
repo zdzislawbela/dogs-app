@@ -1,5 +1,7 @@
 <svg width="34" height="33" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-	<path d="M12.8947 4V28M21.1053 5V28M29.3158 5V29M4.68421 4V29M28.6316 28.5H4M28.6316 20.5H4M28.6316 12.5H4M30 4.5H4" stroke="black"/>
-	<line x1="0.348073" y1="0.64105" x2="33.3481" y2="32.641" stroke="black"/>
-	</svg>
+	<path
+		d="M12.8947 4V28M21.1053 5V28M29.3158 5V29M4.68421 4V29M28.6316 28.5H4M28.6316 20.5H4M28.6316 12.5H4M30 4.5H4"
+		stroke="black" />
+	<line x1="0.348073" y1="0.64105" x2="33.3481" y2="32.641" stroke="black" />
+</svg>
 	

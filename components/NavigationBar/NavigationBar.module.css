@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 65px;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
   gap: 25px;
   backdrop-filter: blur(6px);
   background-color: hsla(0, 0%, 90%, 0.5);
@@ -22,7 +22,6 @@
   height: 30px;
   display: flex;
   justify-content: center;
-  padding-top: 15px;
 }
 
 .selected {
@@ -57,6 +56,12 @@
   background-position: center;
 }
 
+.infoIcon {
+  background: url('../../public/info.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .dogIcon {
   background: url('../../public/guide-dog.svg');
   background-repeat: no-repeat;
@@ -70,6 +75,8 @@
 }
 
 .counterLabel {
+  position: relative;
+  top: 12px;
   color: rgba(30, 30, 30, 0.766);
 }
 

@@ -1,7 +1,7 @@
-import React from "react";
-import { likedDogsDetails, useAppContext } from "../../../context";
+import React from 'react';
+import { likedDogsDetails, useAppContext } from '../../../context/AppContext';
 
-import style from "./HeartButton.module.css";
+import style from './HeartButton.module.css';
 
 type HeartButton = {
   image: string;
@@ -31,8 +31,8 @@ export const HeartButton = ({ image, breed }: HeartButton) => {
       {isLiked && (
         <div className={style.clickedHeartGoTop}>
           <img
-            src='/likedHeart.png'
-            alt='Picture of heart'
+            src="/likedHeart.png"
+            alt="Picture of heart"
             width={28}
             height={28}
           />
@@ -40,8 +40,8 @@ export const HeartButton = ({ image, breed }: HeartButton) => {
       )}
 
       <img
-        src={isLiked ? "/likedHeart.png" : "/heart.png"}
-        alt='Picture of heart'
+        src={isLiked ? '/likedHeart.png' : '/heart.png'}
+        alt="Picture of heart"
         width={28}
         height={28}
       />

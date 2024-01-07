@@ -5,7 +5,7 @@ import router from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import { FetchedDogs } from '../components/FetchedDogs/FetchedDogs';
-import { useAppContext } from '../context';
+import { useAppContext } from '../context/AppContext';
 
 import style from '../styles/Page.module.css';
 

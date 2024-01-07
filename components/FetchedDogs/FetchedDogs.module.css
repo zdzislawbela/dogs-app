@@ -167,7 +167,6 @@
 
   .mosaicDog {
     width: 33.3vw;
-    max-width: 145px;
     min-width: 20px;
     height: 16vh;
   }
@@ -179,7 +178,9 @@
   .mosaicDogImg {
     height: 100%;
     object-fit: cover;
+    filter: drop-shadow(4px 4px 4px black);
   }
+
   .displayNone {
     display: none;
   }

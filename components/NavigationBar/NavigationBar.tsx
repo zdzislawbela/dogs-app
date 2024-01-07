@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-import { KebabMenu } from '../KebabMenu/KebabMenu';
-
-import styles from './Menu.module.css';
-import { useAppContext } from '../../context';
+import styles from './NavigationBar.module.css';
+import { useAppContext } from '../../context/AppContext';
 import { useRouter } from 'next/router';
 import { useScreenWidth } from '../../hooks/useScreenWidth';
+import { Info } from '../Icons/Info';
 
-export const Menu = () => {
-  const { dogs, likedDogs, isMosaic, setIsMosaic } = useAppContext();
+export const NavigationBar = () => {
+  const {
+    dogs,
+    likedDogs,
+    isMosaic,
+    setIsMosaic,
+    isInfoModalVisible,
+    setIsInfoModalVisible,
+  } = useAppContext();
   const { pathname } = useRouter();
   const numberOfFetchedDogs = dogs.length;
   const numberOfLikedDogs = likedDogs.length;
@@ -41,6 +47,20 @@ export const Menu = () => {
     setIsMosaic(!isMosaic);
   };
 
+  const handleToggleInfoModal = () => {
+    setIsInfoModalVisible(!isInfoModalVisible);
+  };
+
+  if (isInfoModalVisible) {
+    return (
+      <div className={styles.menu}>
+        <button className={styles.navButton} onClick={handleToggleInfoModal}>
+          Close
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.menu}>
       {defaultNavigationItems.map(({ href, badge, iconClass }) => (
@@ -63,7 +83,12 @@ export const Menu = () => {
           })}
         ></button>
       )}
-      <KebabMenu />
+      <button
+        onClick={handleToggleInfoModal}
+        className={clsx(styles.navButton)}
+      >
+        <Info />
+      </button>
     </div>
   );
 };

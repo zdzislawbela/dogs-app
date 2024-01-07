@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAppContext } from '../context';
+import { useAppContext } from '../context/AppContext';
 
 type UseBreeds = {
   breeds: string[];

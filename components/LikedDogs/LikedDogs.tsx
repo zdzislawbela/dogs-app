@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useAppContext } from '../../context';
+import { useAppContext } from '../../context/AppContext';
 import { FullScreenButton } from '../Buttons/FullScreenButton/FullScreenButton';
 import { RemoveFromLikeListButton } from '../Buttons/RemoveFromLikeListButton/RemoveFromLikeListButton';
 import { LikedDogModal } from '../LikedDogModal/LikedDogModal';

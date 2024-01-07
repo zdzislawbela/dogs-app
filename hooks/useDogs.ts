@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DogDetails, useAppContext } from '../context';
+import { DogDetails, useAppContext } from '../context/AppContext';
 import { useLocalStorage } from './useLocalStorage';
 import { getRandomArrayIndex } from '../utils/helpers/getRandomArrayIndex';
 

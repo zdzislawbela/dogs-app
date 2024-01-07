@@ -2,10 +2,9 @@ import Head from 'next/head';
 import React from 'react';
 
 import { LikedDogs } from '../components/LikedDogs/LikedDogs';
-import { ParticleBackground } from '../components/ParticleBackground/ParticleBackground';
 import { useSwipeable } from 'react-swipeable';
 
-import { useAppContext } from '../context';
+import { useAppContext } from '../context/AppContext';
 
 import styles from '../styles/Page.module.css';
 import router from 'next/router';
@@ -36,8 +35,6 @@ export default function Liked() {
         />
         <link rel="icon" href="/favicon.png" />
       </Head>
-
-      <ParticleBackground />
 
       <div {...handlers} className={styles.likedDogsContainer}>
         {likedDogs.length !== 0 ? (

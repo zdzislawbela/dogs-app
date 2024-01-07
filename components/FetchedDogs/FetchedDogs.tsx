@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
-import { likedDogsDetails, useAppContext } from '../../context';
+import { likedDogsDetails, useAppContext } from '../../context/AppContext';
 import { HeartButton } from '../Buttons/HeartButton/HeartButton';
 import { LoadingSpinner } from '../LoadingSpinner/LoadingSpinner';
 

@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { useAppContext } from "../../context";
-import { MinimizeButton } from "../Buttons/MinimizeButton/MinimizeButton";
+import { useAppContext } from '../../context/AppContext';
+import { MinimizeButton } from '../Buttons/MinimizeButton/MinimizeButton';
 
-import style from "./LikedDogModal.module.css";
+import style from './LikedDogModal.module.css';
 
 export const LikedDogModal = () => {
   const { modalDetails, setModalDetails } = useAppContext();
@@ -24,7 +24,7 @@ export const LikedDogModal = () => {
         <img
           className={style.likedDogImage}
           src={modalDetails?.image}
-          alt='dog'
+          alt="dog"
         />
 
         <div className={style.likedDogTitle}>

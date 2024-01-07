@@ -9,6 +9,8 @@
   font-family: karla, monospace;
   line-height: 30px;
   color: #333;
+  backdrop-filter: blur(6px);
+  background-color: hsla(0, 0%, 90%, 0.9);
 }
 
 .main {
@@ -102,7 +104,8 @@
   display: flex;
   justify-content: flex-start;
   padding: 0 1rem;
-  border-bottom: rgba(0, 0, 255, 0.253) 1px solid;
+  backdrop-filter: blur(6px);
+  background-color: hsla(0, 0%, 90%, 0.5);
 }
 
 .fourOhFourContainer {

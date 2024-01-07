@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
 
-import { useAppContext } from '../context';
+import { useAppContext } from '../context/AppContext';
 import { BreedCheckbox } from '../components/BreedCheckbox/BreedCheckbox';
 import { SearchBreedInput } from '../components/SearchBreedInput/SearchBreedInput';
 import { useSwipeable } from 'react-swipeable';
