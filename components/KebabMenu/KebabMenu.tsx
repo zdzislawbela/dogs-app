@@ -81,7 +81,7 @@ export const KebabMenu = () => {
       >
         <div className={classes.kebabOptionsContainer}>
           <div>
-            {router.pathname === "/fetch" ? (
+            {router.pathname === "/" ? (
               <MenuItem key='Mosaic' onClick={() => toggleMosaic()}>
                 {isMosaic ? "Turn off mosaic" : "Switch to mosaic"}
               </MenuItem>

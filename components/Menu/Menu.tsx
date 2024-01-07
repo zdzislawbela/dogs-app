@@ -15,39 +15,33 @@ export const Menu = () => {
   const numberOfLikedDogs = likedDogs.length;
 
   const navButtons = [
-    { href: '/', label: 'Home', underElement: '', iconClass: styles.houseIcon },
     {
-      href: '/filter',
-      label: 'Filter',
-      badge: '',
-      iconClass: styles.filterIcon,
-    },
-    {
-      href: '/fetch',
-      label: 'Fetch',
-      badge: (
-        <p className={styles.fetchedCounterLabel}> {numberOfFetchedDogs}</p>
-      ),
+      href: '/',
+      underElement: '',
+      badge: <p className={styles.counterLabel}> {numberOfFetchedDogs}</p>,
       iconClass: styles.dogIcon,
     },
     {
       href: '/liked',
-      label: 'Liked',
-      badge: <p className={styles.likedCounterLabel}> {numberOfLikedDogs}</p>,
+      badge: <p className={styles.counterLabel}> {numberOfLikedDogs}</p>,
       iconClass: styles.heartIcon,
+    },
+    {
+      href: '/filter',
+      badge: '',
+      iconClass: styles.filterIcon,
     },
   ];
 
   return (
     <div className={styles.menu}>
-      {navButtons.map(({ href, label, badge, iconClass }) => (
+      {navButtons.map(({ href, badge, iconClass }) => (
         <Link key={href} href={href}>
           <button
             className={clsx(styles.navButton, iconClass, {
               [styles.selected]: pathname === href,
             })}
           >
-            <a className={styles.label}>{label}</a>
             {badge}
           </button>
         </Link>

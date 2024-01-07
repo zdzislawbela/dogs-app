@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  padding: 65px 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -34,7 +34,7 @@
 }
 
 .mainSelectBreed {
-  padding: 3.9rem 0;
+  padding: 65px 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -149,7 +149,7 @@
 }
 
 .likedDogsContainer {
-  padding: 3.5rem 0;
+  padding: 65px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -187,6 +187,10 @@
 }
 
 @media only screen and (max-width: 450px) {
+  .main {
+    padding: 0;
+  }
+
   .mainSelectBreed {
     padding: 0;
   }

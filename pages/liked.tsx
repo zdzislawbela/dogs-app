@@ -14,11 +14,11 @@ export default function Liked() {
   const { likedDogs } = useAppContext();
 
   const handleSwipeLeft = () => {
-    router.push('/');
+    router.push('/filter');
   };
 
   const handleSwipeRight = () => {
-    router.push('/fetch');
+    router.push('/');
   };
 
   const handlers = useSwipeable({
