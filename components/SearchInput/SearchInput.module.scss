@@ -1,0 +1,62 @@
+.container {
+  position: sticky;
+  top: 4rem;
+  width: 100%;
+  display: flex;
+  z-index: 1;
+  height: 55px;
+  border: 1px solid rgba(73, 76, 76, 0.604);
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem 0.5rem 0.5rem 3rem;
+  border: none;
+}
+
+.loupeContainer {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  width: 2rem;
+  height: 100%;
+}
+
+.deleteTextContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+.deleteButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 450px) {
+  .container {
+    position: sticky;
+    width: 100%;
+    height: 60px;
+    top: 0;
+  }
+}

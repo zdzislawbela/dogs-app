@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { useAppContext } from '../context/AppContext';
 import { BreedCheckbox } from '../components/BreedCheckbox/BreedCheckbox';
-import { SearchBreedInput } from '../components/SearchBreedInput/SearchBreedInput';
+import { SearchInput } from '../components/SearchInput';
 import { useSwipeable } from 'react-swipeable';
 
 import styles from '../styles/Page.module.css';
@@ -67,8 +67,8 @@ export default function Filter() {
     setEmpty();
   };
 
-  const filterBreeds = (userInput: string) => {
-    setKeyword(userInput);
+  const handleSetKeyword = (value: string) => {
+    setKeyword(value);
   };
 
   return (
@@ -77,9 +77,9 @@ export default function Filter() {
         <title>🐕 Select Breeds</title>
       </Head>
 
-      <div {...handlers} className={styles.mainSelectBreed}>
+      <div className={styles.mainSelectBreed} {...handlers}>
         <div className={styles.breeds}>
-          <SearchBreedInput filterBreeds={filterBreeds} />
+          <SearchInput onChange={handleSetKeyword} placeholder="Breed name" />
           <div className={styles.breed}>
             <BreedCheckbox
               handleCheckbox={handleSelectAll}
